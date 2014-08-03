@@ -3,6 +3,7 @@ This module contains the cobol code edit widget.
 """
 from pyqode.core import api, panels, modes
 from pyqode.cobol import modes as cobmodes
+from pyqode.cobol.api import CobolFoldDetector
 
 
 class CobolCodeEdit(api.CodeEdit):
@@ -15,9 +16,9 @@ class CobolCodeEdit(api.CodeEdit):
         #
         # setup panels
         #
-        # self.folding_panel = self.panels.append(
-        #     panels.FoldingPanel(), api.Panel.Position.LEFT
-        # )
+        self.folding_panel = self.panels.append(
+            panels.FoldingPanel(), api.Panel.Position.LEFT
+        )
         self.line_nbr_panel = self.panels.append(
             panels.LineNumberPanel(), api.Panel.Position.LEFT
         )
@@ -59,6 +60,8 @@ class CobolCodeEdit(api.CodeEdit):
             modes.WordClickMode()
         )
         self.modes.append(cobmodes.CobolSyntaxHighlighter(self.document()))
-        self.syntax_highlighter.color_scheme = api.ColorScheme('default')
+
+        self.syntax_highlighter.fold_detector = CobolFoldDetector()
+        # self.syntax_highlighter.color_scheme = api.ColorScheme('default')
 
         # self.show_whitespaces = True
