@@ -1,13 +1,4 @@
-"""
-A very simple cobol editor
-"""
-import logging
-logging.basicConfig(level=logging.INFO)
-import sys
-from pyqode.cobol.widgets import CobolCodeEdit
-from pyqode.core.qt import QtWidgets
-
-default_code = """      *******************************************************************
+      *******************************************************************
       ** Virtual printer subprogram
       *******************************************************************
        IDENTIFICATION DIVISION.
@@ -91,23 +82,3 @@ default_code = """      ********************************************************
            EXIT PROGRAM.
        END PROGRAM VIRTUAL-PRINTER.
 
-"""
-
-
-class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.editor = CobolCodeEdit()
-        self.editor.file.open('hello.cbl')
-        self.setCentralWidget(self.editor)
-
-
-if __name__ == '__main__':
-    with open('hello.cbl', 'w') as f:
-        f.write(default_code)
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    app.exec_()
-    del window
-    del app

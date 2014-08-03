@@ -18,9 +18,18 @@ class CobolCodeEdit(api.CodeEdit):
     def free_format(self, val):
         self._free_format = val
 
+    @property
+    def comment_indicator(self):
+        return self._comment_indicator
+
+    @comment_indicator.setter
+    def comment_indicator(self, value):
+        self._comment_indicator = value
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self._free_format = False
+        self._comment_indicator = '*> '
         #
         # setup panels
         #
@@ -56,9 +65,7 @@ class CobolCodeEdit(api.CodeEdit):
             modes.CaseConverterMode()
         )
         self.code_completion_mode = self.modes.append(
-            modes.CodeCompletionMode()
-        )
-        # no triggers in cobol
+            modes.CodeCompletionMode())
         self.code_completion_mode.trigger_symbols[:] = []
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
@@ -68,7 +75,9 @@ class CobolCodeEdit(api.CodeEdit):
             modes.WordClickMode()
         )
         self.modes.append(cobmodes.CobolSyntaxHighlighter(self.document()))
-
         self.syntax_highlighter.fold_detector = CobolFoldDetector()
 
-
+        self.left_margin = self.modes.append(cobmodes.LeftMarginMode())
+        self.right_margin = self.modes.append(modes.RightMarginMode())
+        self.right_margin.position = 72
+        self.comments_mode = self.modes.append(cobmodes.CommentsMode())
