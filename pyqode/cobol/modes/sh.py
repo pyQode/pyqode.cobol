@@ -4,8 +4,7 @@ This module contains a native python syntax highlighter.
 import logging
 import re
 from pyqode.core.qt import QtGui
-from pyqode.core.api import SyntaxHighlighter as BaseSH, TextHelper
-from pyqode.core.api import TextBlockHelper
+from pyqode.core.api import SyntaxHighlighter as BaseSH
 
 
 def any(name, alternates):
@@ -168,12 +167,16 @@ class CobolSyntaxHighlighter(BaseSH):
     """
     Native cobol highlighter (fixed format).
     """
-    PROG = re.compile(make_cobol_patterns(), re.S)
+    PROG_FIXED_FMT = re.compile(make_cobol_patterns(), re.S)
+    PROG_FREE_FMT = re.compile(make_cobol_patterns(fixed_format=False), re.S)
 
     def highlight_cobol(self, text):
         text = text.upper()
         self.setFormat(0, len(text), self.formats["normal"])
-        match = self.PROG.search(text)
+        if self.editor.free_format:
+            match = self.PROG_FREE_FMT.search(text)
+        else:
+            match = self.PROG_FIXED_FMT.search(text)
         while match:
             for key, value in list(match.groupdict().items()):
                 if value:
@@ -184,7 +187,7 @@ class CobolSyntaxHighlighter(BaseSH):
                         _logger().debug('unsupported format: %s' % key)
                     else:
                         self.setFormat(start, end - start, fmt)
-            match = self.PROG.search(text, match.end())
+            match = self.PROG_FIXED_FMT.search(text, match.end())
 
     def highlight_disabled_columns(self, text):
         fmt = QtGui.QTextCharFormat()
@@ -196,14 +199,5 @@ class CobolSyntaxHighlighter(BaseSH):
 
     def highlight_block(self, text, block):
         self.highlight_cobol(text)
-        self.highlight_disabled_columns(text)
-
-
-class FreeCobolSyntaxHighlighter(CobolSyntaxHighlighter):
-    """
-    Native cobol highlighter (fixed format).
-    """
-    PROG = re.compile(make_cobol_patterns(fixed_format=False), re.S)
-
-    def highlight_block(self, text, block):
-        self.highlight_cobol(text)
+        if not self.editor.free_format:
+            self.highlight_disabled_columns(text)

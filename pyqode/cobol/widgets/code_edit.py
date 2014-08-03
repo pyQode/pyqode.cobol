@@ -10,9 +10,17 @@ class CobolCodeEdit(api.CodeEdit):
     """
     CodeEdit specialized for cobol source code editing.
     """
+    @property
+    def free_format(self):
+        return self._free_format
+
+    @free_format.setter
+    def free_format(self, val):
+        self._free_format = val
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._free_format = False
         #
         # setup panels
         #
@@ -62,6 +70,5 @@ class CobolCodeEdit(api.CodeEdit):
         self.modes.append(cobmodes.CobolSyntaxHighlighter(self.document()))
 
         self.syntax_highlighter.fold_detector = CobolFoldDetector()
-        # self.syntax_highlighter.color_scheme = api.ColorScheme('default')
 
-        # self.show_whitespaces = True
+

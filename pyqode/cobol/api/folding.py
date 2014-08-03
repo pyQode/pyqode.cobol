@@ -36,35 +36,32 @@ class CobolFoldDetector(FoldDetector):
             if 'PROCEDURE' in ctext:
                 self.proc_division = block
                 self._proc_div_txt = block.text()
-            # print(1, ctext)
             return 0
         elif ctext.endswith('SECTION.'):
-            # print(1, ctext)
             return 1
         elif ptext.endswith('DIVISION.'):
-            # print(1, ctext)
             return 1
         elif ptext.endswith('SECTION.'):
-            # print(2, ctext)
             return 2
-        # data division
-        # procedure division
-        if self.proc_division:
-            print(self.proc_division.text())
+        # in case of replace all or simply if the user deleted the data or
+        # proc div.
         if (self.proc_division and
                 self.proc_division.text() != self._proc_div_txt):
             self.proc_division = None
         if (self.data_division and
                 self.data_division.text() != self._data_div_txt):
             self.data_division = None
+        # inside PROCEDURE DIVISION
         if (self.proc_division and self.proc_division.isValid() and
                 block.blockNumber() > self.proc_division.blockNumber()):
+            # we only detect outline of paragraphes
             if self.PROG.indexIn(block.text()) != -1:
                 # paragraph
                 return 1
             else:
                 # content of a paragraph
                 return 2
+        # INSIDE  DATA DIVISION
         elif (self.data_division and self.data_division.isValid() and
                 block.blockNumber() > self.data_division.blockNumber() + 1):
             # here folding is based on the indentation level
@@ -72,5 +69,6 @@ class CobolFoldDetector(FoldDetector):
             indent = ((len(ctext) - len(ctext.lstrip()) - offset) //
                       self.editor.tab_length)
             return 2 + indent
+        # other lines follow their previous fold level
         plvl = TextBlockHelper.get_fold_lvl(prev_block)
         return plvl
