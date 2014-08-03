@@ -6,8 +6,11 @@ import sys
 
 class CobolFoldDetector(FoldDetector):
     # paragraph or struct pattern
-    PROG = QtCore.QRegExp(
+    PAR_OR_STRUCT_PATTERN = QtCore.QRegExp(
         r'((^|^\s{7})[\w\-]+\.\s*$)')
+    LOOP_PATTERN = QtCore.QRegExp(
+        r'PERFORM.+(UNTIL|TIMES){1}'
+    )
 
     def __init__(self):
         super().__init__()
@@ -55,12 +58,29 @@ class CobolFoldDetector(FoldDetector):
         if (self.proc_division and self.proc_division.isValid() and
                 block.blockNumber() > self.proc_division.blockNumber()):
             # we only detect outline of paragraphes
-            if self.PROG.indexIn(block.text()) != -1:
+            if self.PAR_OR_STRUCT_PATTERN.indexIn(block.text()) != -1:
                 # paragraph
                 return 1
             else:
                 # content of a paragraph
-                return 2
+                if self.PAR_OR_STRUCT_PATTERN.indexIn(prev_block.text()) != -1:
+                    return 2
+                else:
+                    cstxt = ctext.lstrip()
+                    pstxt = ptext.lstrip()
+                    plvl = TextBlockHelper.get_fold_lvl(prev_block)
+                    if self.LOOP_PATTERN.indexIn(pstxt) != -1:
+                        pstxt = '$L$O$OP$'
+                    if pstxt in ['END-IF', 'END-PERFORM', 'END-READ']:
+                        if cstxt in ['ELSE']:
+                            return plvl - 2
+                        return plvl - 1
+                    if cstxt in ['ELSE']:
+                        return plvl - 1
+                    for token in ['IF', 'ELSE', '$L$O$OP$', 'READ']:
+                        if pstxt.startswith(token):
+                            return plvl + 1
+                    return plvl
         # INSIDE  DATA DIVISION
         elif (self.data_division and self.data_division.isValid() and
                 block.blockNumber() > self.data_division.blockNumber() + 1):
