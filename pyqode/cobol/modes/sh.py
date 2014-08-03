@@ -105,7 +105,7 @@ FUNCTIONS = [
 
 def make_cobol_patterns(fixed_format=True):
     if fixed_format:
-        comment = any('comment', [r"(^.{6})\*>[^\n]*|(^.{6})\*[^\n]*"])
+        comment = any('comment', [r"(^.{6})\s*\*>[^\n]*|(^.{6})\*[^\n]*"])
     else:
         comment = any('comment', [r"^[ \t]*\*>[^\n]*|\s*\*[^\n]*"])
     keywords_reserved = any(
