@@ -15,8 +15,9 @@ class CobolCodeEdit(api.CodeEdit):
         return self._free_format
 
     @free_format.setter
-    def free_format(self, val):
-        self._free_format = val
+    def free_format(self, free_fmt):
+        self._free_format = free_fmt
+        self.min_indent_column = 7 if not free_fmt else 0
 
     @property
     def comment_indicator(self):
@@ -29,6 +30,7 @@ class CobolCodeEdit(api.CodeEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._free_format = False
+        self.min_indent_column = 7
         self._comment_indicator = '*> '
         #
         # setup panels
@@ -51,6 +53,9 @@ class CobolCodeEdit(api.CodeEdit):
         #
         # setup modes
         #
+        self.auto_indent_mode = self.modes.append(
+            cobmodes.CobolAutoIndentMode()
+        )
         self.caret_line_mode = self.modes.append(
             modes.CaretLineHighlighterMode()
         )
@@ -60,7 +65,6 @@ class CobolCodeEdit(api.CodeEdit):
         self.indenter_mode = self.modes.append(
             modes.IndenterMode()
         )
-        self.indenter_mode.min_indent = 7
         self.case_converter = self.modes.append(
             modes.CaseConverterMode()
         )
@@ -70,7 +74,6 @@ class CobolCodeEdit(api.CodeEdit):
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
         )
-        self.auto_indent_mode.min_indent = 7 * ' '
         self.word_click_mode = self.modes.append(
             modes.WordClickMode()
         )

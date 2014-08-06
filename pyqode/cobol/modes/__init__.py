@@ -1,6 +1,7 @@
 """
 This package contains cobol specific modes
 """
-from .sh import CobolSyntaxHighlighter
-from .left_margin import LeftMarginMode
+from .auto_indent import CobolAutoIndentMode
 from .comments import CommentsMode
+from .left_margin import LeftMarginMode
+from .sh import CobolSyntaxHighlighter

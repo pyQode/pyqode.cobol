@@ -1,4 +1,5 @@
 import re
+from pyqode.cobol.api import regex
 from pyqode.core.api import FoldDetector, TextBlockHelper
 from pyqode.core.qt import QtCore
 import sys
@@ -6,11 +7,7 @@ import sys
 
 class CobolFoldDetector(FoldDetector):
     # paragraph or struct pattern
-    PAR_OR_STRUCT_PATTERN = QtCore.QRegExp(
-        r'((^|^\s{7})[\w\-]+\.\s*$)')
-    LOOP_PATTERN = QtCore.QRegExp(
-        r'PERFORM.+(UNTIL|TIMES){1}'
-    )
+
 
     def __init__(self):
         super().__init__()
@@ -58,18 +55,18 @@ class CobolFoldDetector(FoldDetector):
         if (self.proc_division and self.proc_division.isValid() and
                 block.blockNumber() > self.proc_division.blockNumber()):
             # we only detect outline of paragraphes
-            if self.PAR_OR_STRUCT_PATTERN.indexIn(block.text()) != -1:
+            if regex.PAR_OR_STRUCT_PATTERN.indexIn(block.text()) != -1:
                 # paragraph
                 return 1
             else:
                 # content of a paragraph
-                if self.PAR_OR_STRUCT_PATTERN.indexIn(prev_block.text()) != -1:
+                if regex.PAR_OR_STRUCT_PATTERN.indexIn(prev_block.text()) != -1:
                     return 2
                 else:
                     cstxt = ctext.lstrip()
                     pstxt = ptext.lstrip()
                     plvl = TextBlockHelper.get_fold_lvl(prev_block)
-                    if self.LOOP_PATTERN.indexIn(pstxt) != -1:
+                    if regex.LOOP_PATTERN.indexIn(pstxt) != -1:
                         pstxt = '$L$O$OP$'
                     if pstxt in ['END-IF', 'END-PERFORM', 'END-READ']:
                         if cstxt in ['ELSE']:

@@ -98,8 +98,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.editor = CobolCodeEdit()
-        self.editor.file.open('hello.cbl')
+        self.editor.file.open('hello.cbl', encoding='utf-16')
         self.setCentralWidget(self.editor)
+        self.setMinimumSize(800, 600)
 
 
 if __name__ == '__main__':
