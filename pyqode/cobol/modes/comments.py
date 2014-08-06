@@ -8,10 +8,14 @@ from pyqode.core.qt import QtCore, QtGui, QtWidgets
 
 class CommentsMode(Mode):
     """
-    Mode that allow to comment/uncomment a set of lines.
+    Comments/uncomments a set of lines (Ctrl+/)
+
+    This mode adds a contextual action to the code editor to let the user
+    comment/uncomment the selected lines.
+
+    If no lines were selected, the current line is commented/uncommented and
+    the cursor move to the next line.
     """
-    IDENTIFIER = "commentsMode"
-    DESCRIPTION = "Comments/uncomments a set of lines (Ctrl+/)"
 
     def on_state_changed(self, state):
         """
@@ -28,6 +32,10 @@ class CommentsMode(Mode):
         else:
             self.editor.remove_action(self.action)
             self.editor.remove_action(self.separator)
+            # workaround numpad shortcuts not received with Qt5 (they have an
+            # accepted bug report for that)
+            # TODO: check if we can disable this workaround in a later version
+            # of pyqt5 (wrote this in 2014: pyqt 5.3.1).
             if 'pyqt5' in os.environ['QT_API'].lower():
                 self.editor.key_pressed.disconnect(self.on_key_pressed)
 
@@ -38,21 +46,8 @@ class CommentsMode(Mode):
             self.comment()
             key_event.accept()
 
-    def comment(self):
-        cursor = self.editor.textCursor()
-        cursor.beginEditBlock()
-        sel_start = cursor.selectionStart()
-        sel_end = cursor.selectionEnd()
-        reversed_selection = cursor.position() == sel_start
-        has_selection = True
-        if not cursor.hasSelection():
-            cursor.select(QtGui.QTextCursor.LineUnderCursor)
-            has_selection = False
-        lines = cursor.selection().toPlainText().splitlines()
-        nb_lines = len(lines)
-        cursor.setPosition(sel_start)
+    def _detect_operation(self, comment_symbol, cursor, nb_lines):
         comment = False
-        comment_symbol = self.editor.comment_indicator
         for i in range(nb_lines):
             cursor.movePosition(QtGui.QTextCursor.StartOfLine)
             cursor.movePosition(QtGui.QTextCursor.EndOfLine, cursor.KeepAnchor)
@@ -63,7 +58,25 @@ class CommentsMode(Mode):
             # next line
             cursor.movePosition(QtGui.QTextCursor.EndOfLine)
             cursor.setPosition(cursor.position() + 1)
+        return comment
+
+    def comment(self):
+        cursor = self.editor.textCursor()
+        cursor.beginEditBlock()
+        sel_start = cursor.selectionStart()
+        sel_end = cursor.selectionEnd()
+        has_selection = True
+        if not cursor.hasSelection():
+            cursor.select(QtGui.QTextCursor.LineUnderCursor)
+            has_selection = False
+        lines = cursor.selection().toPlainText().splitlines()
+        nb_lines = len(lines)
         cursor.setPosition(sel_start)
+        comment_symbol = self.editor.comment_indicator
+        # check if we must comment or uncomment
+        comment = self._detect_operation(comment_symbol, cursor, nb_lines)
+        cursor.setPosition(sel_start)
+        l = len(comment_symbol)
         for i in range(nb_lines):
             cursor.movePosition(QtGui.QTextCursor.StartOfLine)
             cursor.movePosition(QtGui.QTextCursor.EndOfLine, cursor.KeepAnchor)
@@ -75,35 +88,35 @@ class CommentsMode(Mode):
                 # Uncomment
                 if not comment:
                     cursor.setPosition(cursor.position() + indent)
-                    cursor.movePosition(cursor.Right, cursor.KeepAnchor, len(comment_symbol))
+                    cursor.movePosition(cursor.Right, cursor.KeepAnchor, l)
                     cursor.insertText("")
                     if i == 0:
-                        sel_start -= 1
-                        sel_end -= 1
+                        sel_start -= l
+                        sel_end -= l
                     else:
-                        sel_end -= 1
+                        sel_end -= l
                 # comment
                 else:
                     cursor.movePosition(QtGui.QTextCursor.StartOfLine)
                     cursor.setPosition(cursor.position() + indent)
                     cursor.insertText(comment_symbol)
                     if i == 0:
-                        sel_start += 1
-                        sel_end += 1
+                        sel_start += l
+                        sel_end += l
                     else:
-                        sel_end += 1
+                        sel_end += l
             # next line
             cursor.movePosition(QtGui.QTextCursor.EndOfLine)
-            cursor.setPosition(cursor.position() + 1)
-        cursor.setPosition(sel_start + (1 if not comment else -1))
+            if not cursor.atEnd():
+                cursor.setPosition(cursor.position() + 1)
         cursor.endEditBlock()
-        # todo improve cursor position restoration
-        # if has_selection:
-        #     pos = sel_end if not reversed_selection else sel_start
-        #     cursor.setPosition(pos, QtGui.QTextCursor.MoveAnchor)
-        # else:
-        assert isinstance(cursor, QtGui.QTextCursor)
-        cursor.movePosition(cursor.Down, cursor.MoveAnchor, 1)
+        if has_selection:
+            cursor.setPosition(sel_start)
+            cursor.setPosition(sel_end, QtGui.QTextCursor.KeepAnchor)
+        else:
+            if not cursor.atEnd():
+                cursor.setPosition(sel_start + (l if not comment else -l))
+                cursor.movePosition(cursor.Down, cursor.MoveAnchor, 1)
         self.editor.setTextCursor(cursor)
 
     def __on_keyPressed(self, event):
