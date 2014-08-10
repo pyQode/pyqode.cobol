@@ -3,7 +3,7 @@ This module contains the various regular expressions used through the whole
 project.
 
 """
-from pyqode.core.qt import QtCore
+from pyqode.qt import QtCore
 
 
 #: This pattern identifies a structure or paragraph definition

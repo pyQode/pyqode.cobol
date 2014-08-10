@@ -3,7 +3,7 @@ This module contains a native python syntax highlighter.
 """
 import logging
 import re
-from pyqode.core.qt import QtGui
+from pyqode.qt import QtGui
 from pyqode.core.api import SyntaxHighlighter as BaseSH
 from pyqode.cobol.api import names
 

@@ -1,7 +1,7 @@
 import re
 from pyqode.cobol.api import regex
 from pyqode.core.api import FoldDetector, TextBlockHelper
-from pyqode.core.qt import QtCore
+from pyqode.qt import QtCore
 import sys
 
 

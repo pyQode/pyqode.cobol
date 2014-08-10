@@ -3,7 +3,7 @@ This module the commenter mode
 """
 import os
 from pyqode.core.api import Mode
-from pyqode.core.qt import QtCore, QtGui, QtWidgets
+from pyqode.qt import QtCore, QtGui, QtWidgets
 
 
 class CommentsMode(Mode):
