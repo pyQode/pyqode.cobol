@@ -55,12 +55,12 @@ class CobolFoldDetector(FoldDetector):
         if (self.proc_division and self.proc_division.isValid() and
                 block.blockNumber() > self.proc_division.blockNumber()):
             # we only detect outline of paragraphes
-            if regex.PAR_OR_STRUCT_PATTERN.indexIn(block.text()) != -1:
+            if regex.PARAGRAPH_PATTERN.indexIn(block.text()) != -1:
                 # paragraph
                 return 1
             else:
                 # content of a paragraph
-                if regex.PAR_OR_STRUCT_PATTERN.indexIn(prev_block.text()) != -1:
+                if regex.PARAGRAPH_PATTERN.indexIn(prev_block.text()) != -1:
                     return 2
                 else:
                     cstxt = ctext.lstrip()

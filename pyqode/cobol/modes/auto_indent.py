@@ -6,10 +6,30 @@ from pyqode.cobol.api import regex, names
 
 
 class CobolAutoIndentMode(AutoIndentMode):
+    """
+    Implements a smarter (regex based) automatic indentater.
+
+    Automatic indentation is triggered when the user press enter. The base
+    implementation is to use the previous line indentation. This works fine
+    in most situations but there are cases where the indenter could
+    automatically increase indentation (e.g. after an if statement or a
+    loop,...). This is what this mode do.
+
+    """
     def _get_indent(self, cursor):
         pre_indent, post_indent = super()._get_indent(cursor)
-        text = cursor.block().text()
-        if regex.PAR_OR_STRUCT_PATTERN.indexIn(text) != -1:
-            post_indent += self.editor.tab_length * ' '
-        print(text)
+        # all regex are upper cases
+        text = cursor.block().text().upper()
+        # raise indentation level
+        patterns = [
+            regex.PARAGRAPH_PATTERN,
+            regex.STUCT_PATTERN,
+            regex.BRANCH_START,
+            regex.LOOP_PATTERN
+        ]
+        for ptrn in patterns:
+            if ptrn.indexIn(text) != -1:
+                post_indent += self.editor.tab_length * ' '
+                return pre_indent, post_indent
+        # use the previous line indentation
         return pre_indent, post_indent

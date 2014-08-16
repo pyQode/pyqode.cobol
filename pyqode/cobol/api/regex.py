@@ -5,11 +5,13 @@ project.
 """
 from pyqode.qt import QtCore
 
-
-#: This pattern identifies a structure or paragraph definition
-PAR_OR_STRUCT_PATTERN = QtCore.QRegExp(
-        r'((^|^\s{7})[\w\-]+\.\s*$)')
+#: This pattern identifies a struct definition (01 XXXX.)
+STUCT_PATTERN = QtCore.QRegExp(r'((^|^\s*)\d\d [\w\-]+\.$)')
+#: This pattern identifies a paragraph definition
+PARAGRAPH_PATTERN = QtCore.QRegExp(r'((^|^\s{7})[\w\-]+\.\s*$)')
 #: This pattern identifies a loop pattern
-LOOP_PATTERN = QtCore.QRegExp(
-        r'PERFORM.+(UNTIL|TIMES){1}'
-)
+LOOP_PATTERN = QtCore.QRegExp(r'PERFORM.+(UNTIL|TIMES){1}')
+#: This pattern identifies the start of a branch
+BRANCH_START = QtCore.QRegExp(r'(IF.*\)|ELSE)')
+#: This pattern identifies the end of a branch
+BRANCH_END = QtCore.QRegExp(r'END-\w*$')
