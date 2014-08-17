@@ -3,6 +3,9 @@
     <file>../share/icons/pyqode.cobol/class.png</file>
     <file>../share/icons/pyqode.cobol/func.png</file>
     <file>../share/icons/pyqode.cobol/var.png</file>
+    <file>../share/icons/pyqode.cobol/cobol-mimetype.png</file>
+    <file>../share/icons/pyqode.cobol/namespace.png</file>
+    <file>../share/icons/pyqode.cobol/silex-192x192.png</file>
     <file>../share/icons/pyqode.cobol/keyword.png</file>
   </qresource>
 </RCC>

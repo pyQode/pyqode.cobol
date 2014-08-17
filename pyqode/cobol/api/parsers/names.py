@@ -101,7 +101,7 @@ def parse_division(l, c, line, root_node, last_section_node):
     """
     name = line
     name = name.replace(".", "")
-    node = Name(Name.Type.Division, l + 1, c, name)
+    node = Name(Name.Type.Division, l, c, name)
     root_node.add_child(node)
     last_div_node = node
     # do not take previous sections into account
@@ -127,7 +127,7 @@ def parse_section(l, c, last_div_node, last_vars, line):
     """
     name = line
     name = name.replace(".", "")
-    node = Name(Name.Type.Section, l + 1, c, name)
+    node = Name(Name.Type.Section, l, c, name)
     last_div_node.add_child(node)
     last_section_node = node
     # do not take previous var into account
@@ -180,7 +180,7 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
     if not parent_node:
         # malformed code
         return None
-    node = Name(Name.Type.Variable, l + 1, c, name, description)
+    node = Name(Name.Type.Variable, l, c, name, description)
     parent_node.add_child(node)
     last_vars[lvl] = node
     return node
@@ -204,7 +204,7 @@ def parse_paragraph(l, c, last_div_node, last_section_node, line):
     parent_node = last_div_node
     if last_section_node is not None:
         parent_node = last_section_node
-    node = Name(Name.Type.Paragraph, l + 1, c, name)
+    node = Name(Name.Type.Paragraph, l, c, name)
     parent_node.add_child(node)
     return node
 

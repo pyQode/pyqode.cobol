@@ -1,14 +1,6 @@
-from pyqode.cobol.api.keywords import PSEUDO_KEYWORDS
-from pyqode.cobol.api.keywords import RESERVED_KEYWORDS
-from pyqode.cobol.api.keywords import NAME_CONSTANTS
-from pyqode.cobol.api.keywords import FUNCTIONS
+from pyqode.cobol.api import icons
+from pyqode.cobol.api import keywords
 from pyqode.cobol.api.parsers.names import defined_names
-
-
-ICON_FUNC = ":/icons/share/icons/pyqode.cobol/func.png"
-ICON_VAR = ":/icons/share/icons/pyqode.cobol/var.png"
-ICON_KEYWORD = ":/icons/share/icons/pyqode.cobol/keyword.png"
-
 
 free_format = False
 
@@ -21,12 +13,12 @@ def set_free_format(value):
 class CobolAnalyserProvider:
     def __init__(self):
         self.__keywordsCompletions = []
-        for keyword in PSEUDO_KEYWORDS + RESERVED_KEYWORDS:
+        for keyword in keywords.PSEUDO + keywords.RESERVED:
             self.__keywordsCompletions.append(
-                {'name': keyword, 'icon': ICON_KEYWORD})
-        for keyword in NAME_CONSTANTS + FUNCTIONS:
+                {'name': keyword, 'icon': icons.ICON_KEYWORD})
+        for keyword in keywords.NAME_CONSTANTS + keywords.FUNCTIONS:
             self.__keywordsCompletions.append(
-                {'name': keyword, 'icon': ICON_FUNC})
+                {'name': keyword, 'icon': icons.ICON_FUNC})
 
     def complete(self, code, line, column, completionPrefix,
                  file_path, file_encoding):
@@ -41,13 +33,13 @@ class CobolAnalyserProvider:
         for var in vars:
             completions.append({
                 'name': var.name,
-                'icon': ICON_VAR,
+                'icon': icons.ICON_VAR,
                 'tooltip': var.description
             })
         for func in functions:
             completions.append({
                 'name': func.name,
-                'icon': ICON_FUNC
+                'icon': icons.ICON_FUNC
             })
         completions += self.__keywordsCompletions
         return completions

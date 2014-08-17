@@ -21,11 +21,11 @@ def make_cobol_patterns(fixed_format=True):
     keywords_reserved = any(
         'keyword_reserved',
         ['(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-         '|'.join(kw.RESERVED_KEYWORDS)])
+         '|'.join(kw.RESERVED)])
     keywords = any(
         'keyword',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-         '|'.join(kw.PSEUDO_KEYWORDS)])
+         '|'.join(kw.PSEUDO)])
     constants = any(
         'constant',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))((%s)|(%s))\s*($|(?=[^0-9a-zA-Z_\-]))' %

@@ -4,8 +4,9 @@ A very simple cobol editor
 import logging
 logging.basicConfig(level=logging.INFO)
 import sys
-from pyqode.cobol.widgets import CobolCodeEdit
-from pyqode.qt import QtWidgets
+from pyqode.qt import QtCore, QtWidgets
+from pyqode.cobol.widgets import CobolCodeEdit, OutlineTreeWidget
+
 
 default_code = """      *******************************************************************
       ** Virtual printer subprogram
@@ -100,7 +101,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.editor = CobolCodeEdit()
         self.editor.file.open('hello.cbl', encoding='utf-16')
         self.setCentralWidget(self.editor)
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(950, 600)
+
+        self.outline_tree = OutlineTreeWidget()
+        dock_widget = QtWidgets.QDockWidget(self)
+        dock_widget.setWidget(self.outline_tree)
+        dock_widget.setWindowTitle('Document outline')
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
+        self.outline_tree.set_editor(self.editor)
 
 
 if __name__ == '__main__':
