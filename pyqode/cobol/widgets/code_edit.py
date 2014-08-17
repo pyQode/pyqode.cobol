@@ -1,6 +1,7 @@
 """
 This module contains the cobol code edit widget.
 """
+import mimetypes
 import os
 import sys
 from pyqode.cobol.backend import server
@@ -16,6 +17,9 @@ class CobolCodeEdit(api.CodeEdit):
     """
     CodeEdit specialized for cobol source code editing.
     """
+    mimetypes = ['text/x-cobol']
+    extensions = [".COB", ".CBL", ".PCO", ".CPY"]
+
     @property
     def free_format(self):
         return self._free_format
@@ -123,3 +127,7 @@ class CobolCodeEdit(api.CodeEdit):
         self.search_panel = self.panels.append(
             panels.SearchAndReplacePanel(), api.Panel.Position.BOTTOM
         )
+
+for ext in CobolCodeEdit.extensions:
+    mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext)
+    mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext.lower())
