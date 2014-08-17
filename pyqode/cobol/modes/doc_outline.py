@@ -53,10 +53,10 @@ class DocumentOutlineMode(QObject, Mode):
         Called when the mode is activated/deactivated
         """
         if state:
-            self.editor.new_text_set.connect(self._parse)
+            self.editor.new_text_set.connect(self.parse)
             self.editor.textChanged.connect(self._parse)
         else:
-            self.editor.new_text_set.disconnect(self._parse)
+            self.editor.new_text_set.disconnect(self.parse)
             self.editor.textChanged.disconnect(self._parse)
 
     def _parse(self):
