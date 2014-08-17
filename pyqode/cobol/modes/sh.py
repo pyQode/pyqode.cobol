@@ -5,7 +5,7 @@ import logging
 import re
 from pyqode.qt import QtGui
 from pyqode.core.api import SyntaxHighlighter as BaseSH
-from pyqode.cobol.api import names
+from pyqode.cobol.api import keywords as kw
 
 
 def any(name, alternates):
@@ -21,15 +21,15 @@ def make_cobol_patterns(fixed_format=True):
     keywords_reserved = any(
         'keyword_reserved',
         ['(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-         '|'.join(names.RESERVED_KEYWORDS)])
+         '|'.join(kw.RESERVED_KEYWORDS)])
     keywords = any(
         'keyword',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-        '|'.join(names.PSEUDO_KEYWORDS)])
+        '|'.join(kw.PSEUDO_KEYWORDS)])
     constants = any(
         'constant',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))((%s)|(%s))\s*($|(?=[^0-9a-zA-Z_\-]))' %
-         (names.NAME_CONSTANTS[0], '|'.join(names.NAME_CONSTANTS[1:])),
+         (kw.NAME_CONSTANTS[0], '|'.join(kw.NAME_CONSTANTS[1:])),
          '(^|(?<=[^0-9a-zA-Z_\-]))'
          '(PIC\s+.+?(?=(\s|\.\s?))|PICTURE\s+.+?(?=(\s|\.\s?))|'
          '(COMPUTATIONAL)(-[1-5X])?|(COMP)(-[1-5X])?|'

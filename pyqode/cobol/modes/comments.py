@@ -27,15 +27,15 @@ class CommentsMode(Mode):
             self.action.triggered.connect(self.comment)
             self.separator = self.editor.add_separator()
             self.editor.add_action(self.action)
+            # workaround numpad shortcuts not received with Qt5 (they have an
+            # accepted bug report for that)
+            # TODO: check if we can disable this workaround in a later version
+            # of pyqt5 (wrote this in 2014: pyqt 5.3.1).
             if 'pyqt5' in os.environ['QT_API'].lower():
                 self.editor.key_pressed.connect(self.on_key_pressed)
         else:
             self.editor.remove_action(self.action)
             self.editor.remove_action(self.separator)
-            # workaround numpad shortcuts not received with Qt5 (they have an
-            # accepted bug report for that)
-            # TODO: check if we can disable this workaround in a later version
-            # of pyqt5 (wrote this in 2014: pyqt 5.3.1).
             if 'pyqt5' in os.environ['QT_API'].lower():
                 self.editor.key_pressed.disconnect(self.on_key_pressed)
 
@@ -118,9 +118,3 @@ class CommentsMode(Mode):
                 cursor.setPosition(sel_start + (l if not comment else -l))
                 cursor.movePosition(cursor.Down, cursor.MoveAnchor, 1)
         self.editor.setTextCursor(cursor)
-
-    def __on_keyPressed(self, event):
-        if(event.modifiers() & QtCore.Qt.ControlModifier and
-           event.key() == QtCore.Qt.Key_Slash):
-            event.accept()
-            self.comment()

@@ -2,7 +2,7 @@
 This module contains a cobol specific auto indenter mode.
 """
 from pyqode.core.modes import AutoIndentMode
-from pyqode.cobol.api import regex, names
+from pyqode.cobol.api import regex, keywords
 
 
 class CobolAutoIndentMode(AutoIndentMode):
@@ -23,7 +23,7 @@ class CobolAutoIndentMode(AutoIndentMode):
         # raise indentation level
         patterns = [
             regex.PARAGRAPH_PATTERN,
-            regex.STUCT_PATTERN,
+            regex.STRUCT_PATTERN,
             regex.BRANCH_START,
             regex.LOOP_PATTERN
         ]

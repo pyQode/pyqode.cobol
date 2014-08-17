@@ -6,7 +6,7 @@ project.
 from pyqode.qt import QtCore
 
 #: This pattern identifies a struct definition (01 XXXX.)
-STUCT_PATTERN = QtCore.QRegExp(r'((^|^\s*)\d\d [\w\-]+\.$)')
+STRUCT_PATTERN = QtCore.QRegExp(r'((^|^\s*)\d\d [\w\-]+\.$)')
 #: This pattern identifies a paragraph definition
 PARAGRAPH_PATTERN = QtCore.QRegExp(r'((^|^\s{7})[\w\-]+\.\s*$)')
 #: This pattern identifies a loop pattern

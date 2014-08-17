@@ -16,10 +16,12 @@ class CobolCodeEdit(api.CodeEdit):
 
     @free_format.setter
     def free_format(self, free_fmt):
-        self._free_format = free_fmt
-        self.min_indent_column = 7 if not free_fmt else 0
-        self.left_margin.enabled = not free_fmt
-        self.right_margin.enabled = not free_fmt
+        if free_fmt != self._free_format:
+            self._free_format = free_fmt
+            self.min_indent_column = 7 if not free_fmt else 0
+            self.left_margin.enabled = not free_fmt
+            self.right_margin.enabled = not free_fmt
+            self.syntax_highlighter.rehighlight()
 
     @property
     def comment_indicator(self):
@@ -55,6 +57,9 @@ class CobolCodeEdit(api.CodeEdit):
         #
         # setup modes
         #
+        self.file_watcher = self.modes.append(
+            modes.FileWatcherMode()
+        )
         self.auto_indent_mode = self.modes.append(
             cobmodes.CobolAutoIndentMode()
         )
@@ -86,5 +91,3 @@ class CobolCodeEdit(api.CodeEdit):
         self.right_margin = self.modes.append(modes.RightMarginMode())
         self.right_margin.position = 72
         self.comments_mode = self.modes.append(cobmodes.CommentsMode())
-
-        self.free_format = True
