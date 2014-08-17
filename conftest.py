@@ -67,13 +67,11 @@ def editor(request):
     logging.info('################ setup session editor ################')
 
     _widget = CobolCodeEdit()
-    # todo start backend when we have one
-    # _widget.backend.start(server.__file__)
     _widget.resize(800, 600)
     _widget.show()
     _app.setActiveWindow(_widget)
-    # while not _widget.backend.connected:
-    #     QTest.qWait(100)
+    while not _widget.backend.connected:
+        QTest.qWait(100)
 
     _widget.modes.get(modes.FileWatcherMode).file_watcher_auto_reload = True
     _widget.save_on_focus_out = False
