@@ -69,6 +69,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.outline_mode = self.modes.append(
             cobmodes.DocumentOutlineMode()
         )
+        self.goto_def_mode = self.modes.append(
+            cobmodes.GoToDefinitionMode()
+        )
         self.code_completion_mode = self.modes.append(
             modes.CodeCompletionMode()
         )
@@ -93,9 +96,6 @@ class CobolCodeEdit(api.CodeEdit):
         )
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
-        )
-        self.word_click_mode = self.modes.append(
-            modes.WordClickMode()
         )
         self.modes.append(cobmodes.CobolSyntaxHighlighter(self.document()))
         self.syntax_highlighter.fold_detector = CobolFoldDetector()

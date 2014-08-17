@@ -9,6 +9,7 @@ omit =
     # at the moment, we do not test misc ui elements such as
     # widgets and dialogs (how could this be possible to test?)
     *pyqode/cobol/ui/*
+    *pyqode/cobol/widgets/*
 
 [report]
 # Regexes for lines to exclude from consideration

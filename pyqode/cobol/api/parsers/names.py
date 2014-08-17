@@ -47,6 +47,22 @@ class Name(object):
         """
         self.children.append(child)
 
+    def find(self, name):
+        """
+        Finds a possible child whose name match the name parameter.
+
+        :param name: name of the child node to look up
+        :type name: str
+
+        :return: DocumentNode or None
+        """
+        for c in self.children:
+            if c.name == name:
+                return c
+            result = c.find(name)
+            if result:
+                return result
+
     def __repr__(self):
         type_names = {
             self.Type.Root: "Root",
