@@ -5,15 +5,8 @@ the jedi helper module for their testing package
 """
 import os
 import functools
-import platform
 from os.path import abspath
 from os.path import dirname
-from pyqode.core import api
-
-from pyqode.qt.QtTest import QTest
-from pyqode.core import modes
-from pyqode.core import panels
-from pyqode.python.folding import PythonFoldDetector
 
 
 test_dir = dirname(abspath(__file__))
