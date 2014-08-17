@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>../share/icons/pyqode.cobol/class.png</file>
+    <file>../share/icons/pyqode.cobol/func.png</file>
+    <file>../share/icons/pyqode.cobol/var.png</file>
+    <file>../share/icons/pyqode.cobol/keyword.png</file>
+  </qresource>
+</RCC>

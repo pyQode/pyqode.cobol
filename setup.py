@@ -5,6 +5,18 @@ This setup script packages pyqode.python
 """
 from setuptools import setup, find_packages
 
+#
+# add ``build_ui command`` (optional, for development only)
+# this command requires the following packages:
+#   - pyqt_distutils
+#   - pyqode-uic
+#
+try:
+    from pyqt_distutils.build_ui import build_ui
+    cmdclass = {'build_ui': build_ui}
+except ImportError:
+    cmdclass = {}
+
 
 def read_version():
     with open("pyqode/cobol/__init__.py") as f:
@@ -21,7 +33,7 @@ def readme():
 
 # get requirements
 requirements = [
-    'pyqode.core>=2.0'
+    'pyqode.core>=2.1'
 ]
 
 
@@ -40,6 +52,7 @@ setup(
     long_description=readme(),
     install_requires=requirements,
     zip_safe=False,
+    cmdclass=cmdclass,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: X11 Applications :: Qt',
