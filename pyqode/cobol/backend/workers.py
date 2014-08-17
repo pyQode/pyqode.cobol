@@ -10,6 +10,14 @@ ICON_VAR = ":/icons/share/icons/pyqode.cobol/var.png"
 ICON_KEYWORD = ":/icons/share/icons/pyqode.cobol/keyword.png"
 
 
+free_format = False
+
+
+def set_free_format(value):
+    global free_format
+    free_format = value
+
+
 class CobolAnalyserProvider:
     def __init__(self):
         self.__keywordsCompletions = []
@@ -22,9 +30,11 @@ class CobolAnalyserProvider:
 
     def complete(self, code, line, column, completionPrefix,
                  file_path, file_encoding):
+        global free_format
         completions = []
         try:
-            root, vars, functions = defined_names(code)
+            root, vars, functions = defined_names(
+                code, free_format=free_format)
         except AttributeError:
             vars = []
             functions = []
