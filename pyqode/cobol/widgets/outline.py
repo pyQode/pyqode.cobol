@@ -94,9 +94,9 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
         self._editor.folding_panel.trigger_state_changed.connect(
             self._on_block_state_changed)
         self._editor.folding_panel.collapse_all_triggered.connect(
-                self.collapseAll)
+            self.collapseAll)
         self._editor.folding_panel.expand_all_triggered.connect(
-                self.expandAll)
+            self.expandAll)
         self._update(editor.outline_mode.root_node)
 
     def _convert_name(self, name, editor):
@@ -125,7 +125,7 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
 
     def _name_to_items(self, root, editor):
         """
-        Converts each node in an AST (returned by the parser module) to a QTreeWidgetItem
-        for display.
+        Converts each node in an AST (returned by the parser module) to a
+        QTreeWidgetItem for display.
         """
         return self._convert_name(root, editor)
