@@ -6,6 +6,7 @@ from .comments import CommentsMode
 from .doc_outline import DocumentOutlineMode
 from .goto import GoToDefinitionMode
 from .left_margin import LeftMarginMode
+from .pic_offset import OffsetCalculatorMode
 from .sh import CobolSyntaxHighlighter
 
 
@@ -15,5 +16,6 @@ __all__ = [
     'DocumentOutlineMode',
     'GoToDefinitionMode',
     'LeftMarginMode',
-    'CobolSyntaxHighlighter'
+    'CobolSyntaxHighlighter',
+    'OffsetCalculatorMode'
 ]

@@ -103,6 +103,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.right_margin = self.modes.append(modes.RightMarginMode())
         self.right_margin.position = 72
         self.comments_mode = self.modes.append(cobmodes.CommentsMode())
+        self.add_separator()
+        self.offset_calculator = self.modes.append(
+            cobmodes.OffsetCalculatorMode())
 
     def _setup_panels(self):
         self.folding_panel = self.panels.append(

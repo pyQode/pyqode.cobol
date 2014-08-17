@@ -5,7 +5,9 @@ import logging
 logging.basicConfig(level=logging.INFO)
 import sys
 from pyqode.qt import QtCore, QtWidgets
-from pyqode.cobol.widgets import CobolCodeEdit, OutlineTreeWidget
+from pyqode.cobol.widgets import CobolCodeEdit
+from pyqode.cobol.widgets import OutlineTreeWidget
+from pyqode.cobol.widgets import PicOffsetsTable
 
 
 default_code = """      *******************************************************************
@@ -109,6 +111,14 @@ class MainWindow(QtWidgets.QMainWindow):
         dock_widget.setWindowTitle('Document outline')
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
         self.outline_tree.set_editor(self.editor)
+
+        self.pic_offsets_table = PicOffsetsTable(self)
+        dock_widget = QtWidgets.QDockWidget(self)
+        dock_widget.setWidget(self.pic_offsets_table)
+        dock_widget.setWindowTitle('PIC offsets table')
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
+        self.pic_offsets_table.set_editor(self.editor)
+
 
 
 if __name__ == '__main__':
