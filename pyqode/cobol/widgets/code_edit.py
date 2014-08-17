@@ -66,8 +66,12 @@ class CobolCodeEdit(api.CodeEdit):
             self.backend.start(server.__file__)
 
     def _setup_modes(self):
+        self.doc_outline_mode = self.modes.append(
+            cobmodes.DocumentOutlineMode()
+        )
         self.code_completion_mode = self.modes.append(
-            modes.CodeCompletionMode())
+            modes.CodeCompletionMode()
+        )
         self.code_completion_mode.trigger_symbols[:] = []
         self.file_watcher = self.modes.append(
             modes.FileWatcherMode()
