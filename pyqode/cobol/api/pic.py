@@ -73,6 +73,3 @@ def get_field_infos(code):
             offset += 1
 
     return field_infos
-
-
-

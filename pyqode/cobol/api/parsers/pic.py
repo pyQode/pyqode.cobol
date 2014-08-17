@@ -147,7 +147,7 @@ def parse_cobol(lines):
                 ][0]
 
                 related_group = get_subgroup(
-                    redefined_item['level'], output[redefined_item_index+1:])
+                    redefined_item['level'], output[redefined_item_index + 1:])
 
                 output = (output[:redefined_item_index] +
                           output[redefined_item_index +
@@ -188,7 +188,7 @@ def denormalize_cobol(lines):
 def handle_occurs(lines, occurs, level_diff=0, name_postfix=""):
     output = []
 
-    for i in range(1, occurs+1):
+    for i in range(1, occurs + 1):
 
         skip_till = 0
         new_name_postfix = (name_postfix if occurs == 1 else
@@ -219,7 +219,7 @@ def handle_occurs(lines, occurs, level_diff=0, name_postfix=""):
                     # multiple times
                     new_row['occurs'] = None
 
-                    for j in range(1, row["occurs"]+1):
+                    for j in range(1, row["occurs"] + 1):
                         row_to_add = new_row.copy()
 
                         # First time occurs is just 1, we don't want to add
@@ -233,7 +233,7 @@ def handle_occurs(lines, occurs, level_diff=0, name_postfix=""):
 
                 else:
                     # Get all the lines that have to occur
-                    occur_lines = get_subgroup(row['level'], lines[index+1:])
+                    occur_lines = get_subgroup(row['level'], lines[index + 1:])
 
                     # Calculate the new level difference that has to be applied
                     new_level_diff = level_diff + row['level'] - occur_lines[
@@ -261,11 +261,11 @@ def clean_names(lines, ensure_unique_names=False, strip_prefix=False,
 
     for row in lines:
         if strip_prefix:
-            row['name'] = row['name'][row['name'].find('-')+1:]
+            row['name'] = row['name'][row['name'].find('-') + 1:]
 
             if row['indexed_by'] is not None:
                 row['indexed_by'] = row['indexed_by'][row['indexed_by'].find(
-                    '-')+1:]
+                    '-') + 1:]
 
         if ensure_unique_names:
             i = 1

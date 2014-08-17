@@ -1,14 +1,8 @@
-import re
 from pyqode.cobol.api import regex
 from pyqode.core.api import FoldDetector, TextBlockHelper
-from pyqode.qt import QtCore
-import sys
 
 
 class CobolFoldDetector(FoldDetector):
-    # paragraph or struct pattern
-
-
     def __init__(self):
         super().__init__()
         self.proc_division = None

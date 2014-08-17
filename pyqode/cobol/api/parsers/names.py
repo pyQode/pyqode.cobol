@@ -137,7 +137,8 @@ def parse_section(l, c, last_div_node, last_vars, line):
 
 def parse_pic_field(l, c, last_section_node, last_vars, line):
     """
-    Parse a pic field line. Return A VariableNode or None in case of malformed code.
+    Parse a pic field line. Return A VariableNode or None in case of malformed
+    code.
 
     :param l: The line number (starting from 0)
     :param c: The column number (starting from 0)
@@ -261,7 +262,7 @@ def defined_names(code, free_format=False):
                     variables.append(v)
             # PARAGRAPHS
             elif (last_div_node is not None and
-                          "PROCEDURE DIVISION" in last_div_node.name):
+                  "PROCEDURE DIVISION" in last_div_node.name):
                 tokens = line.split(" ")
                 if len(tokens) == 1 and not tokens[0] in ALL_KEYWORDS:
                     p = parse_paragraph(
@@ -279,4 +280,3 @@ def defined_names(code, free_format=False):
         last_div_node.end_line = len(lines)
     root_node.end_line = last_div_node.end_line
     return root_node, variables, paragraphs
-

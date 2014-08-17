@@ -25,7 +25,7 @@ def make_cobol_patterns(fixed_format=True):
     keywords = any(
         'keyword',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-        '|'.join(kw.PSEUDO_KEYWORDS)])
+         '|'.join(kw.PSEUDO_KEYWORDS)])
     constants = any(
         'constant',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))((%s)|(%s))\s*($|(?=[^0-9a-zA-Z_\-]))' %
