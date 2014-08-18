@@ -33,9 +33,10 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
         self.itemExpanded.connect(self._on_item_state_changed)
 
     def _on_click(self, item):
-        name = item.data(0, QtCore.Qt.UserRole)
-        TextHelper(self._editor).goto_line(name.block.blockNumber(),
-                                           column=name.column)
+        if item:
+            name = item.data(0, QtCore.Qt.UserRole)
+            TextHelper(self._editor).goto_line(name.block.blockNumber(),
+                                               column=name.column)
         # self._editor.setFocus(True)
 
     def _on_item_state_changed(self, item):
