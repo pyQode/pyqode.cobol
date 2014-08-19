@@ -31,15 +31,17 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
         self.currentItemChanged.connect(self._on_click)
         self.itemCollapsed.connect(self._on_item_state_changed)
         self.itemExpanded.connect(self._on_item_state_changed)
+        self._updating = True
 
     def _on_click(self, item):
         if item:
             name = item.data(0, QtCore.Qt.UserRole)
             TextHelper(self._editor).goto_line(name.block.blockNumber(),
                                                column=name.column)
-        # self._editor.setFocus(True)
 
     def _on_item_state_changed(self, item):
+        if self._updating:
+            return
         if item == self._root_item:
             item_state = not item.isExpanded()
             if item_state:
@@ -67,6 +69,7 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
                     self.expandItem(data.tree_item)
 
     def _update(self, root, *args):
+        self._updating = True
         self.clear()
         self._to_collapse = []
         if root:
@@ -76,6 +79,7 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
             self.expandAll()
             for item_to_collapse in reversed(self._to_collapse):
                 self.collapseItem(item_to_collapse)
+        self._updating = False
 
     def set_editor(self, editor):
         """
