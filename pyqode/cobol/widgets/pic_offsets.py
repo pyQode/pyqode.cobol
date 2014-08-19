@@ -1,7 +1,9 @@
-from pyqode.qt import QtWidgets
+from pyqode.qt import QtCore, QtWidgets
 
 
 class PicOffsetsTable(QtWidgets.QTableWidget):
+    show_requested = QtCore.Signal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self._update([])
@@ -44,3 +46,4 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
                 i, 2, QtWidgets.QTableWidgetItem("%s" % info.offset))
             self.setItem(
                 i, 3, QtWidgets.QTableWidgetItem(info.pic))
+        self.show_requested.emit()
