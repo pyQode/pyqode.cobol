@@ -294,5 +294,6 @@ def defined_names(code, free_format=False):
         last_par.end_line = len(lines) - 1
     if last_div_node:
         last_div_node.end_line = len(lines)
-    root_node.end_line = last_div_node.end_line
+    if root_node: # skip empty documents
+        root_node.end_line = last_div_node.end_line
     return root_node, variables, paragraphs
