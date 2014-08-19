@@ -43,6 +43,7 @@ class GoToDefinitionMode(Mode, QObject):
         Mode.__init__(self)
         self._previous_cursor_start = -1
         self._previous_cursor_end = -1
+        self._definition = None
         self._deco = None
         self._pending = False
         self.action_goto = QAction("Go to assignments", self)
@@ -135,9 +136,8 @@ class GoToDefinitionMode(Mode, QObject):
         if not tc:
             tc = TextHelper(self.editor).word_under_cursor(
                 select_whole_word=True)
-        if not self._definition:
+        if not self._definition or isinstance(self.sender(), QAction):
             self.select_word(tc)
-            self.editor.set_mouse_cursor(Qt.PointingHandCursor)
         QTimer.singleShot(100, self._goto_def)
 
     def _goto_def(self):
