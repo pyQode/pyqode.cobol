@@ -6,6 +6,4 @@ def test_code_completion():
         code = f.read()
     provider = CobolAnalyserProvider()
     completions = provider.complete(code, 0, 0, '', '', '')
-    assert len(completions) == 466
-
-
+    assert len(completions) == 491
