@@ -12,11 +12,17 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
 
     def set_editor(self, editor):
         if self._editor is not None:
-            self._editor.offset_calculator.pic_infos_available.disconnect(
-                self._update)
+            try:
+                self._editor.offset_calculator.pic_infos_available.disconnect(
+                    self._update)
+            except AttributeError:
+                pass
         self._editor = editor
-        self._editor.offset_calculator.pic_infos_available.connect(
-            self._update)
+        try:
+            self._editor.offset_calculator.pic_infos_available.connect(
+                self._update)
+        except AttributeError:
+            pass
 
     def _update(self, infos):
         self.clear()

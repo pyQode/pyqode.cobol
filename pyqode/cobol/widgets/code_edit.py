@@ -4,19 +4,25 @@ This module contains the cobol code edit widget.
 import mimetypes
 import os
 import sys
-from pyqode.cobol.backend import server
 from pyqode.core import api, panels, modes
-from pyqode.cobol import modes as cobmodes
-from pyqode.cobol.api import CobolFoldDetector
-from pyqode.cobol._forms import resources_rc
 from pyqode.core.backend import NotConnected
-from pyqode.core.qt import QtCore
+from pyqode.core.managers import FileManager
+from pyqode.core.qt import QtCore, QtGui
+from pyqode.cobol import modes as cobmodes
+from pyqode.cobol.api import CobolFoldDetector, icons
+from pyqode.cobol.backend import server
+from pyqode.cobol._forms import resources_rc
 
 
 class CobolCodeEdit(api.CodeEdit):
     """
     CodeEdit specialized for cobol source code editing.
     """
+    class CobolFileManager(FileManager):
+        def _get_icon(self):
+            return QtGui.QIcon(icons.ICON_MIMETYPE)
+
+
     mimetypes = ['text/x-cobol']
     extensions = [".COB", ".CBL", ".PCO", ".CPY"]
 
@@ -51,6 +57,7 @@ class CobolCodeEdit(api.CodeEdit):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.file = self.CobolFileManager(self)
         self._free_format = False
         self.min_indent_column = 7
         self._comment_indicator = '*> '
@@ -73,6 +80,7 @@ class CobolCodeEdit(api.CodeEdit):
         self.outline_mode = self.modes.append(
             cobmodes.DocumentOutlineMode()
         )
+        self.add_separator()
         self.goto_def_mode = self.modes.append(
             cobmodes.GoToDefinitionMode()
         )
@@ -95,9 +103,6 @@ class CobolCodeEdit(api.CodeEdit):
         self.indenter_mode = self.modes.append(
             modes.IndenterMode()
         )
-        self.case_converter = self.modes.append(
-            modes.CaseConverterMode()
-        )
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
         )
@@ -107,6 +112,10 @@ class CobolCodeEdit(api.CodeEdit):
         self.right_margin = self.modes.append(modes.RightMarginMode())
         self.right_margin.position = 72
         self.comments_mode = self.modes.append(cobmodes.CommentsMode())
+        self.add_separator()
+        self.case_converter = self.modes.append(
+            modes.CaseConverterMode()
+        )
         self.add_separator()
         self.offset_calculator = self.modes.append(
             cobmodes.OffsetCalculatorMode())
