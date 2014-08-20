@@ -36,8 +36,9 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
     def _on_click(self, item):
         if item:
             name = item.data(0, QtCore.Qt.UserRole)
-            TextHelper(self._editor).goto_line(name.block.blockNumber(),
-                                               column=name.column)
+            if name:
+                TextHelper(self._editor).goto_line(name.block.blockNumber(),
+                                                   column=name.column)
 
     def _on_item_state_changed(self, item):
         if self._updating:
