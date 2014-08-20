@@ -8,7 +8,7 @@ from pyqode.cobol.api import icons, Name
 from pyqode.core.api import TextBlockHelper, TextHelper, TextBlockUserData
 
 ICONS = {
-    Name.Type.Root: icons.ICON_COBOL,
+    Name.Type.Root: icons.ICON_MIMETYPE,
     Name.Type.Division: icons.ICON_DIVISION,
     Name.Type.Section: icons.ICON_SECTION,
     Name.Type.Variable: icons.ICON_VAR,
