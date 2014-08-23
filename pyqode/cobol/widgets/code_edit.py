@@ -26,6 +26,10 @@ class CobolCodeEdit(api.CodeEdit):
     mimetypes = ['text/x-cobol']
     extensions = [".COB", ".CBL", ".PCO", ".CPY"]
 
+    @classmethod
+    def all_extensions(cls):
+        return cls.extensions + [ext.lower() for ext in cls.extensions]
+
     @property
     def free_format(self):
         return self._free_format
