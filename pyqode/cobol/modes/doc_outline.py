@@ -58,6 +58,7 @@ class DocumentOutlineMode(QObject, Mode):
         else:
             self.editor.new_text_set.disconnect(self.parse)
             self.editor.textChanged.disconnect(self._parse)
+            self._runner.cancel_requests()
 
     def _parse(self):
         self._runner.request_job(self.parse)
