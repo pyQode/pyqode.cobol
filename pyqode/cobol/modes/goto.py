@@ -26,13 +26,7 @@ class Definition(object):
 
 class GoToDefinitionMode(Mode, QObject):
     """
-    Goes to the assignments (using jedi.Script.goto_assignments). If there are
-    more than one assignments, an input dialog is used to ask the user to
-    choose the desired assignment.
-
-    This mode will emit :attr:`pyqode.python.GoToAssignmentsMode.outOfDocument`
-    if the definition can not be reached in the current document. IDEs will
-    typically open a new editor tab and go to the definition.
+    Go to the definition of the symbol under the word cursor.
     """
     #: Signal emitted when a word is clicked. The parameter is a
     #: QTextCursor with the clicked word set as the selected text.
