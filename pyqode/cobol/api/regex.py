@@ -12,6 +12,6 @@ PARAGRAPH_PATTERN = QtCore.QRegExp(r'((^|^\s{7})[\w\-]+\.\s*$)')
 #: This pattern identifies a loop pattern
 LOOP_PATTERN = QtCore.QRegExp(r'PERFORM.+(UNTIL|TIMES){1}')
 #: This pattern identifies the start of a branch
-BRANCH_START = QtCore.QRegExp(r'(IF.*\)|ELSE)')
+BRANCH_START = QtCore.QRegExp(r'((^|\s)IF\b|ELSE)')
 #: This pattern identifies the end of a branch
 BRANCH_END = QtCore.QRegExp(r'END-\w*$')
