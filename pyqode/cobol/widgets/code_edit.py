@@ -126,6 +126,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.occurences_highlighter_mode = self.modes.append(
             modes.OccurrencesHighlighterMode()
         )
+        self.backspace_mode = self.modes.append(
+            modes.SmartBackSpaceMode()
+        )
 
     def _setup_panels(self):
         self.folding_panel = self.panels.append(
