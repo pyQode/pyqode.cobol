@@ -123,6 +123,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.add_separator()
         self.offset_calculator = self.modes.append(
             cobmodes.OffsetCalculatorMode())
+        self.occurences_highlighter_mode = self.modes.append(
+            modes.OccurrencesHighlighterMode()
+        )
 
     def _setup_panels(self):
         self.folding_panel = self.panels.append(
