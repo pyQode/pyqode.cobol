@@ -22,7 +22,6 @@ class CobolCodeEdit(api.CodeEdit):
         def _get_icon(self):
             return QtGui.QIcon(icons.ICON_MIMETYPE)
 
-
     mimetypes = ['text/x-cobol']
     extensions = [".COB", ".CBL", ".PCO", ".CPY"]
 

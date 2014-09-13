@@ -14,7 +14,7 @@ class CobolAnalyserProvider:
     def __init__(self):
         self.__keywordsCompletions = []
         for keyword in (keywords.PSEUDO + keywords.RESERVED +
-                keywords.CONSTANTS):
+                        keywords.CONSTANTS):
             self.__keywordsCompletions.append(
                 {'name': keyword, 'icon': icons.ICON_KEYWORD})
         for keyword in keywords.NAME_CONSTANTS + keywords.FUNCTIONS:
