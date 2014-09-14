@@ -128,6 +128,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.backspace_mode = self.modes.append(
             modes.SmartBackSpaceMode()
         )
+        self.extended_selection_mode = self.modes.append(
+            modes.ExtendedSelectionMode()
+        )
 
     def _setup_panels(self):
         self.folding_panel = self.panels.append(
