@@ -1,7 +1,7 @@
 from pyqode.qt.QtCore import QObject, QTimer, Signal, Qt
 from pyqode.qt.QtWidgets import QAction
 from pyqode.qt.QtGui import QTextCursor
-from pyqode.core.api import Mode, TextHelper, TextDecoration
+from pyqode.core.api import Mode, TextHelper, TextDecoration, DelayJobRunner
 
 
 class Definition(object):
@@ -44,6 +44,7 @@ class GoToDefinitionMode(Mode, QObject):
         self.action_goto.setShortcut('F3')
         self.action_goto.triggered.connect(self.request_goto)
         self.word_clicked.connect(self.request_goto)
+        self._timer = DelayJobRunner(delay=200)
 
     def on_state_changed(self, state):
         """
@@ -54,6 +55,7 @@ class GoToDefinitionMode(Mode, QObject):
             self.editor.mouse_moved.connect(self._on_mouse_moved)
             self.editor.mouse_pressed.connect(self._on_mouse_pressed)
             self.editor.add_action(self.action_goto)
+            self.editor.mouse_double_clicked.connect(self._timer.cancel_requests)
         else:
             self.editor.mouse_moved.disconnect(self._on_mouse_moved)
             self.editor.mouse_pressed.disconnect(self._on_mouse_pressed)
@@ -84,7 +86,7 @@ class GoToDefinitionMode(Mode, QObject):
         if event.button() == 1 and self._deco:
             cursor = TextHelper(self.editor).word_under_mouse_cursor()
             if cursor and cursor.selectedText():
-                self.word_clicked.emit(cursor)
+                self._timer.request_job(self.word_clicked.emit, cursor)
 
     def select_word(self, cursor):
         symbol = cursor.selectedText()
