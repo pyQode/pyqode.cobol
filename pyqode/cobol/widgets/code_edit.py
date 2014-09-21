@@ -148,6 +148,8 @@ class CobolCodeEdit(api.CodeEdit):
         self.search_panel = self.panels.append(
             panels.SearchAndReplacePanel(), api.Panel.Position.BOTTOM
         )
+        self.global_checker_panel = self.panels.append(
+            panels.GlobalCheckerPanel(), api.Panel.Position.RIGHT)
 
 for ext in CobolCodeEdit.extensions:
     mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext)
