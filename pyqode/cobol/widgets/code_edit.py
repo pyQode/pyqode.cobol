@@ -5,7 +5,7 @@ import mimetypes
 import os
 import sys
 from pyqode.core import api, panels, modes
-from pyqode.core.backend import NotConnected
+from pyqode.core.backend import NotRunning
 from pyqode.core.managers import FileManager
 from pyqode.core.qt import QtCore, QtGui
 from pyqode.cobol import modes as cobmodes
@@ -37,7 +37,7 @@ class CobolCodeEdit(api.CodeEdit):
         from pyqode.cobol.backend.workers import set_free_format
         try:
             self.backend.send_request(set_free_format, self.free_format)
-        except NotConnected:
+        except NotRunning:
             QtCore.QTimer.singleShot(100, self._update_backend_format)
 
     @free_format.setter
