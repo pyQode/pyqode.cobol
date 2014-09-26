@@ -33,7 +33,7 @@ def readme():
 
 # get requirements
 requirements = [
-    'pyqode.core>=2.1'
+    'pyqode.core>=2.3'
 ]
 
 
