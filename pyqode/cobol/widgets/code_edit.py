@@ -5,7 +5,7 @@ import mimetypes
 import os
 import sys
 from pyqode.core import api, panels, modes
-from pyqode.core.backend import NotConnected
+from pyqode.core.backend import NotRunning
 from pyqode.core.managers import FileManager
 from pyqode.core.qt import QtCore, QtGui
 from pyqode.cobol import modes as cobmodes
@@ -22,7 +22,6 @@ class CobolCodeEdit(api.CodeEdit):
         def _get_icon(self):
             return QtGui.QIcon(icons.ICON_MIMETYPE)
 
-
     mimetypes = ['text/x-cobol']
     extensions = [".COB", ".CBL", ".PCO", ".CPY"]
 
@@ -38,7 +37,7 @@ class CobolCodeEdit(api.CodeEdit):
         from pyqode.cobol.backend.workers import set_free_format
         try:
             self.backend.send_request(set_free_format, self.free_format)
-        except NotConnected:
+        except NotRunning:
             QtCore.QTimer.singleShot(100, self._update_backend_format)
 
     @free_format.setter
@@ -123,6 +122,15 @@ class CobolCodeEdit(api.CodeEdit):
         self.add_separator()
         self.offset_calculator = self.modes.append(
             cobmodes.OffsetCalculatorMode())
+        self.occurences_highlighter_mode = self.modes.append(
+            modes.OccurrencesHighlighterMode()
+        )
+        self.backspace_mode = self.modes.append(
+            modes.SmartBackSpaceMode()
+        )
+        self.extended_selection_mode = self.modes.append(
+            modes.ExtendedSelectionMode()
+        )
 
     def _setup_panels(self):
         self.folding_panel = self.panels.append(
@@ -140,6 +148,8 @@ class CobolCodeEdit(api.CodeEdit):
         self.search_panel = self.panels.append(
             panels.SearchAndReplacePanel(), api.Panel.Position.BOTTOM
         )
+        self.global_checker_panel = self.panels.append(
+            panels.GlobalCheckerPanel(), api.Panel.Position.RIGHT)
 
 for ext in CobolCodeEdit.extensions:
     mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext)
