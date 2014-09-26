@@ -55,11 +55,14 @@ class GoToDefinitionMode(Mode, QObject):
             self.editor.mouse_moved.connect(self._on_mouse_moved)
             self.editor.mouse_pressed.connect(self._on_mouse_pressed)
             self.editor.add_action(self.action_goto)
-            self.editor.mouse_double_clicked.connect(self._timer.cancel_requests)
+            self.editor.mouse_double_clicked.connect(
+                self._timer.cancel_requests)
         else:
             self.editor.mouse_moved.disconnect(self._on_mouse_moved)
             self.editor.mouse_pressed.disconnect(self._on_mouse_pressed)
             self.editor.remove_action(self.action_goto)
+            self.editor.mouse_double_clicked.disconnect(
+                self._timer.cancel_requests)
 
     def _select_word_under_mouse_cursor(self):
         """ Selects the word under the mouse cursor. """
