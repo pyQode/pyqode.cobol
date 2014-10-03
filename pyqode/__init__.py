@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-pyQode is a source code editor widget for PyQt (4 and 5) and PySide.
+pyQode is a source code editor widget for Python Qt (PyQt5/PyQt4/PySide)
 
 pyQode is a **namespace package**.
 """
