@@ -15,32 +15,39 @@ About
     :target: https://coveralls.io/r/pyQode/pyqode.cobol?branch=master
     :alt: Coverage Status
 
-*pyqode.cobol* adds **COBOL** support to `pyqode.core`_ (code completion,
+*pyqode.cobol* adds **COBOL** support to `pyQode`_ (code completion,
 code folding,...).
+
+
+- `Issue tracker`_
+- `Wiki`_
+- `API reference`_
+- `Screenshots`_
 
 
 Features:
 ---------
 
-  * cobol code completion provider based on the cobol keywords and the defined
-    names of the current document (pic fields, paragraphes)
-  * code folding mode
-  * auto indent mode (after struct, paragraph or inside procedures)
-  * native (fast) syntax highlighter with pygments themes support.
-  * document outline widget
+* cobol code completion provider based on the cobol keywords and the defined
+  names of the current document (pic fields, paragraphes)
+* code folding mode
+* auto indent mode (after struct, paragraph or inside procedures)
+* native (fast) syntax highlighter with pygments themes support.
+* document outline widget
 
 License
 -------
 
-pyqode.cobol is licensed under the GPL v3.
+pyqode.cobol is licensed under the **GPL v3**.
 
 
 Requirements
 ------------
 
-pyqode.cobol depends on the following libraries:
+pyqode.python depends on the following libraries:
 
- - pyqode.core
+- python 3 (>= 3.2)
+- pyqode.core
 
 
 Installation
@@ -51,14 +58,16 @@ Installation
     $ pip3 install pyqode.cobol
 
 
-Resources
----------
 
--  `Downloads`_
--  `Source repository`_
+Testing
+-------
+
+To test pyqode.cobol, just run the `runtests.py` script with a python 3
+interpreter.
 
 
-.. _Downloads: https://github.com/pyQode/pyqode.python/releases
-.. _Source repository: https://github.com/pyQode/pyqode.python/
-.. _pyqode.core: https://github.com/pyQode/pyqode.core
-
+.. _pyQode: https://github.com/pyQode/pyQode
+.. _Screenshots: https://github.com/pyQode/pyQode/wiki/Screenshots-and-videos#opencobolide-screenshots
+.. _Issue tracker: https://github.com/pyQode/pyQode/issues
+.. _Wiki: https://github.com/pyQode/pyQode/wiki
+.. _API reference: http://pyqodecobol.readthedocs.org/en/latest/
