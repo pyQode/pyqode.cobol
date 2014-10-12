@@ -22,6 +22,8 @@ code folding,...).
 - `Issue tracker`_
 - `Wiki`_
 - `API reference`_
+- `Contributing`_
+- `Changelog`_
 - `Screenshots`_
 
 
@@ -71,3 +73,5 @@ interpreter.
 .. _Issue tracker: https://github.com/pyQode/pyQode/issues
 .. _Wiki: https://github.com/pyQode/pyQode/wiki
 .. _API reference: http://pyqodecobol.readthedocs.org/en/latest/
+.. _Changelog: https://github.com/pyQode/pyqode.cobol/blob/master/CHANGELOG.rst
+.. _Contributing: https://github.com/pyQode/pyqode.cobol/blob/master/CONTRIBUTING.rst
