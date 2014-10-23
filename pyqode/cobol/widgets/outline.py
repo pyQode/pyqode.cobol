@@ -103,7 +103,7 @@ class OutlineTreeWidget(QtWidgets.QTreeWidget):
                     self.collapseAll)
                 self._editor.folding_panel.expand_all_triggered.disconnect(
                     self.expandAll)
-            except AttributeError:
+            except (AttributeError, RuntimeError):
                 pass
         self._editor = editor
         try:
