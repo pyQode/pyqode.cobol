@@ -80,6 +80,8 @@ class CobolCodeEdit(api.CodeEdit):
             self.backend.start(server.__file__)
 
     def _setup_modes(self):
+        self.auto_complete = self.modes.append(
+            modes.AutoCompleteMode())
         self.outline_mode = self.modes.append(
             cobmodes.DocumentOutlineMode()
         )
