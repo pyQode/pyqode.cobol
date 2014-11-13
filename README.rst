@@ -1,20 +1,29 @@
 .. image:: https://raw.githubusercontent.com/pyQode/pyQode/master/media/pyqode-banner.png
+|
+.. image:: https://pypip.in/version/pyqode.cobol/badge.svg
+   :target: https://pypi.python.org/pypi/pyqode.cobol/
+   :alt: Latest PyPI version
 
+.. image:: https://pypip.in/download/pyqode.cobol/badge.svg
+   :target: https://pypi.python.org/pypi/pyqode.cobol/
+   :alt: Number of PyPI downloads
+
+.. image:: https://pypip.in/py_versions/pyqode.cobol/badge.svg
+   :target: https://pypi.python.org/pypi/pyqode.cobol/
+   :alt: Supported python version
+   
+.. image:: https://pypip.in/license/pyqode.cobol/badge.svg
+
+.. image:: https://travis-ci.org/pyQode/pyqode.cobol.svg?branch=master
+   :target: https://travis-ci.org/pyQode/pyqode.cobol
+   :alt: Travis-CI build status
+
+.. image:: https://coveralls.io/repos/pyQode/pyqode.cobol/badge.png?branch=master
+   :target: https://coveralls.io/r/pyQode/pyqode.cobol?branch=master
+   :alt: Coverage Status
 
 About
 -----
-.. image:: http://img.shields.io/pypi/v/pyqode.cobol.png
-    :target: https://pypi.python.org/pypi/pyqode.cobol/
-    :alt: Latest PyPI version
-
-.. image:: https://travis-ci.org/pyQode/pyqode.cobol.svg?branch=master
-    :target: https://travis-ci.org/pyQode/pyqode.cobol
-    :alt: Travis-CI build status
-
-.. image:: https://coveralls.io/repos/pyQode/pyqode.cobol/badge.png?branch=master
-    :target: https://coveralls.io/r/pyQode/pyqode.cobol?branch=master
-    :alt: Coverage Status
-
 *pyqode.cobol* adds **COBOL** support to `pyQode`_ (code completion,
 code folding,...).
 
