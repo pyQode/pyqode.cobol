@@ -7,7 +7,7 @@ import sys
 from pyqode.core import api, panels, modes
 from pyqode.core.backend import NotRunning
 from pyqode.core.managers import FileManager
-from pyqode.core.qt import QtCore, QtGui
+from pyqode.qt import QtCore, QtGui
 from pyqode.cobol import modes as cobmodes
 from pyqode.cobol.api import CobolFoldDetector, icons
 from pyqode.cobol.backend import server
