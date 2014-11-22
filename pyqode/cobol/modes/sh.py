@@ -94,6 +94,8 @@ class CobolSyntaxHighlighter(BaseSH):
                     start, end = match.span(key)
                     try:
                         fmt = self.formats[key]
+                        if key == 'keyword':
+                            fmt.setFontWeight(QtGui.QFont.Normal)
                     except KeyError:
                         _logger().debug('unsupported format: %s' % key)
                     else:
