@@ -18,6 +18,9 @@ class CobolAutoIndentMode(AutoIndentMode):
     """
     def _get_indent(self, cursor):
         pre_indent, post_indent = super()._get_indent(cursor)
+        min_column = self.editor.indenter_mode.min_column
+        if len(post_indent) < min_column:
+            post_indent = min_column * ' '
         # all regex are upper cases
         text = cursor.block().text().upper()
         # raise indentation level

@@ -44,7 +44,7 @@ class CobolCodeEdit(api.CodeEdit):
     def free_format(self, free_fmt):
         if free_fmt != self._free_format:
             self._free_format = free_fmt
-            self.min_indent_column = 7 if not free_fmt else 0
+            self.indenter_mode.min_column = 7 if not free_fmt else 0
             self.left_margin.enabled = not free_fmt
             self.right_margin.enabled = not free_fmt
             self.syntax_highlighter.rehighlight()
@@ -62,12 +62,12 @@ class CobolCodeEdit(api.CodeEdit):
         super().__init__(parent)
         self.file = self.CobolFileManager(self)
         self._free_format = False
-        self.min_indent_column = 7
         self._comment_indicator = '*> '
         self.word_separators.remove('-')
         self._start_server()
         self._setup_panels()
         self._setup_modes()
+        self.indenter_mode.min_column = 7
 
     def _start_server(self):
         if hasattr(sys, "frozen"):
@@ -106,7 +106,7 @@ class CobolCodeEdit(api.CodeEdit):
             modes.ZoomMode()
         )
         self.indenter_mode = self.modes.append(
-            modes.IndenterMode()
+            cobmodes.IndenterMode()
         )
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
@@ -128,7 +128,7 @@ class CobolCodeEdit(api.CodeEdit):
             modes.OccurrencesHighlighterMode()
         )
         self.backspace_mode = self.modes.append(
-            modes.SmartBackSpaceMode()
+            cobmodes.SmartBackSpaceMode()
         )
         self.extended_selection_mode = self.modes.append(
             modes.ExtendedSelectionMode()
