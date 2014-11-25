@@ -217,7 +217,7 @@ def parse_paragraph(l, c, last_div_node, last_section_node, line):
     name = line.replace(".", "")
     if name.strip() == '':
         return None
-    if name.lower() == 'end-if':
+    if name.lower() in ['end-if', 'end-perform']:
         return None
     parent_node = last_div_node
     if last_section_node is not None:
