@@ -66,9 +66,7 @@ Installation
 
 ::
 
-    $ pip3 install pyqode.cobol
-
-
+    $ pip3 install pyqode.cobol --upgrade
 
 Testing
 -------

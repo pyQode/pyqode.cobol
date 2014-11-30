@@ -1,6 +1,25 @@
 Change log
 ==========
 
+2.4.0
+-----
+
+*starting from version 2.4, all pyqode packages share the same master version (== 2 first numbers)*
+
+New features:
+
+- new indenter made specifically for COBOL
+- improve syntax highlighter: the lexer is now able to make the distinctions
+  between regular keywords and types (PIC clauses will have a different color
+  when using some specific pygments styles, not all styles define different
+  colors for the different types of keywords).
+
+Fixed bugs:
+
+- fix OpenCobolIDE/OpenCobolIDE#76: end-if/end-perform appear in the outline
+  view
+
+
 1.1.0
 -----
 
