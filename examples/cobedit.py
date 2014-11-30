@@ -101,7 +101,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.editor = CobolCodeEdit()
-        self.editor.file.open('hello.cbl', encoding='utf-16')
+        self.editor.file.open('hello.cbl')
         self.setCentralWidget(self.editor)
         self.setMinimumSize(950, 600)
 
@@ -118,7 +118,6 @@ class MainWindow(QtWidgets.QMainWindow):
         dock_widget.setWindowTitle('PIC offsets table')
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
         self.pic_offsets_table.set_editor(self.editor)
-
 
 
 if __name__ == '__main__':

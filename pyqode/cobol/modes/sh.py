@@ -31,13 +31,14 @@ def make_cobol_patterns(fixed_format=True):
         [r'(^|(?<=[^0-9a-zA-Z_\-]))((%s)|(%s))\s*($|(?=[^0-9a-zA-Z_\-]))' %
          (kw.NAME_CONSTANTS[0], '|'.join(kw.NAME_CONSTANTS[1:])),
          '(^|(?<=[^0-9a-zA-Z_\-]))'
-         '(PIC\s+.+?(?=(\s|\.\s?))|PICTURE\s+.+?(?=(\s|\.\s?))|'
-         '(COMPUTATIONAL)(-[1-5X])?|(COMP)(-[1-5X])?|'
-         'BINARY-C-LONG|'
-         'BINARY-CHAR|BINARY-DOUBLE|BINARY-LONG|BINARY-SHORT|'
-         'BINARY)\s*($|(?=[^0-9a-zA-Z_\-]))',
          '(^|(?<=[^0-9a-zA-Z_\-]))(equal|equals|ne|lt|le|gt|ge|'
          'greater|less|than|not|and|or)\s*($|(?=[^0-9a-zA-Z_\-]))'])
+    types = any('type', [
+        '(PIC\s+.+?(?=(\s|\.\s?))|PICTURE\s+.+?(?=(\s|\.\s?))|'
+        '(COMPUTATIONAL)(-[1-5X])?|(COMP)(-[1-5X])?|'
+        'BINARY-C-LONG|'
+        'BINARY-CHAR|BINARY-DOUBLE|BINARY-LONG|BINARY-SHORT|'
+        'BINARY)\s*($|(?=[^0-9a-zA-Z_\-]))'])
     # operator = any('operator', ['(\*\*|\*|\+|-|/|<=|>=|<|>|==|/=|=)'])
     punctuation = any('punctuation', ['([(),;:&%.])'])
     name_builtin = any(
@@ -58,7 +59,7 @@ def make_cobol_patterns(fixed_format=True):
             keywords_reserved,
             keywords,
             constants,
-            # definitions,
+            types,
             comment,
             punctuation,
             name_builtin,
@@ -83,7 +84,7 @@ class CobolSyntaxHighlighter(BaseSH):
 
     def highlight_cobol(self, text):
         text = text.upper()
-        self.setFormat(0, len(text), self.formats["normal"])
+        self.setFormat(0, len(text), self.formats["instance"])
         if self.editor.free_format:
             match = self.PROG_FREE_FMT.search(text)
         else:
