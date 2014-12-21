@@ -33,13 +33,6 @@ class CobolCodeEdit(api.CodeEdit):
     def free_format(self):
         return self._free_format
 
-    def _update_backend_format(self):
-        from pyqode.cobol.backend.workers import set_free_format
-        try:
-            self.backend.send_request(set_free_format, self.free_format)
-        except NotRunning:
-            QtCore.QTimer.singleShot(100, self._update_backend_format)
-
     @free_format.setter
     def free_format(self, free_fmt):
         if free_fmt != self._free_format:
@@ -49,6 +42,15 @@ class CobolCodeEdit(api.CodeEdit):
             self.right_margin.enabled = not free_fmt
             self.syntax_highlighter.rehighlight()
             self._update_backend_format()
+
+    @property
+    def lower_case_keywords(self):
+        return self._lower_case_keywords
+
+    @lower_case_keywords.setter
+    def lower_case_keywords(self, value):
+        self._lower_case_keywords = value
+        self._update_backend_proposed_kw_case()
 
     @property
     def comment_indicator(self):
@@ -61,6 +63,7 @@ class CobolCodeEdit(api.CodeEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.file = self.CobolFileManager(self)
+        self._lower_case_keywords = False
         self._free_format = False
         self._comment_indicator = '*> '
         self.word_separators.remove('-')
@@ -152,6 +155,20 @@ class CobolCodeEdit(api.CodeEdit):
         )
         self.global_checker_panel = self.panels.append(
             panels.GlobalCheckerPanel(), api.Panel.Position.RIGHT)
+
+    def _update_backend_format(self):
+        from pyqode.cobol.backend.workers import set_free_format
+        try:
+            self.backend.send_request(set_free_format, self.free_format)
+        except NotRunning:
+            QtCore.QTimer.singleShot(100, self._update_backend_format)
+
+    def _update_backend_proposed_kw_case(self):
+        from pyqode.cobol.backend.workers import set_lower_case_keywords
+        try:
+            self.backend.send_request(set_lower_case_keywords, self.lower_case_keywords)
+        except NotRunning:
+            QtCore.QTimer.singleShot(100, self._update_backend_proposed_kw_case)
 
 for ext in CobolCodeEdit.extensions:
     mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext)

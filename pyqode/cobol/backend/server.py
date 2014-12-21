@@ -12,12 +12,12 @@ DocumentWordsProvider to the CodeCompletion worker.
 """
 from pyqode.core import backend
 
-from pyqode.cobol.backend.workers import CobolAnalyserProvider
+from pyqode.cobol.backend.workers import CobolCodeCompletionProvider
 
 
 if __name__ == '__main__':
     backend.CodeCompletionWorker.providers.append(
-        CobolAnalyserProvider())
+        CobolCodeCompletionProvider())
     backend.DocumentWordsProvider.separators.remove('-')
     backend.CodeCompletionWorker.providers.append(
         backend.DocumentWordsProvider())
