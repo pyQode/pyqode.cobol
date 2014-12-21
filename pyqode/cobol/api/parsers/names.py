@@ -258,7 +258,7 @@ def defined_names(code, free_format=False):
                 line = 6 * " " + line[6:]
         column = len(line) - len(line.lstrip())
         if not line.isspace() and not line.strip().startswith("*"):
-            line = line.strip()
+            line = line.strip().upper()
             # DIVISIONS
             if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?\.$', line):
                 # remember
