@@ -6,6 +6,7 @@ The code comes from OpenCobolIDE and has been left mostly intact.
 
 """
 import logging
+import re
 from pyqode.cobol.api.keywords import ALL_KEYWORDS
 
 
@@ -259,7 +260,7 @@ def defined_names(code, free_format=False):
         if not line.isspace() and not line.strip().startswith("*"):
             line = line.strip()
             # DIVISIONS
-            if line.upper().strip().endswith('DIVISION.'):
+            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?\.$', line):
                 # remember
                 if last_div_node is not None:
                     last_div_node.end_line = i
