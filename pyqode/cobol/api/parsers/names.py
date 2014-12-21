@@ -217,7 +217,7 @@ def parse_paragraph(l, c, last_div_node, last_section_node, line):
     name = line.replace(".", "")
     if name.strip() == '':
         return None
-    if name.lower() in ['end-if', 'end-perform']:
+    if name.upper() in ALL_KEYWORDS:
         return None
     parent_node = last_div_node
     if last_section_node is not None:
@@ -259,14 +259,14 @@ def defined_names(code, free_format=False):
         if not line.isspace() and not line.strip().startswith("*"):
             line = line.strip()
             # DIVISIONS
-            if "DIVISION" in line.upper():
+            if line.upper().strip().endswith('DIVISION.'):
                 # remember
                 if last_div_node is not None:
                     last_div_node.end_line = i
                 last_div_node, last_section_node = parse_division(
                     i, column, line, root_node, last_section_node)
             # SECTIONS
-            elif "SECTION" in line:
+            elif line.upper().strip().endswith('SECTION.'):
                 if last_section_node:
                     last_section_node.end_line = i
                 last_section_node = parse_section(
