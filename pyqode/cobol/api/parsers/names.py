@@ -171,7 +171,7 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
         if not t.isspace() and t != "":
             tokens.append(t)
     try:
-        if tokens[0] == "FD":
+        if tokens[0].upper() == "FD":
             lvl = 1
         else:
             lvl = int(tokens[0], 16)
@@ -258,9 +258,9 @@ def defined_names(code, free_format=False):
                 line = 6 * " " + line[6:]
         column = len(line) - len(line.lstrip())
         if not line.isspace() and not line.strip().startswith("*"):
-            line = line.strip().upper()
+            line = line.strip()
             # DIVISIONS
-            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?\.$', line):
+            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?\.$', line.upper()):
                 # remember
                 if last_div_node is not None:
                     last_div_node.end_line = i
@@ -274,15 +274,15 @@ def defined_names(code, free_format=False):
                     i, column, last_div_node, last_vars, line)
             # VARIABLES
             elif (last_div_node is not None and
-                    "DATA DIVISION" in last_div_node.name):
+                    "DATA DIVISION" in last_div_node.name.upper()):
                 v = parse_pic_field(
                     i, column, last_section_node, last_vars, line)
                 if v:
                     variables.append(v)
             # PARAGRAPHS
             elif (last_div_node is not None and
-                  "PROCEDURE DIVISION" in last_div_node.name):
-                tokens = line.split(" ")
+                  "PROCEDURE DIVISION" in last_div_node.name.upper()):
+                tokens = line.upper().split(" ")
                 if len(tokens) == 1 and not tokens[0] in ALL_KEYWORDS:
                     p = parse_paragraph(
                         i, column, last_div_node, last_section_node, line)

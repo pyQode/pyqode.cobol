@@ -90,3 +90,15 @@ def test_parse_pco():
     assert len(ast.children[2].children) == 2
     assert len(vars) == 0
     assert len(procs) == 1
+
+
+def test_lower_case_variables():
+    """
+    Virtual printer must have 8 vars
+    """
+    with open('test/testfiles/VIRTUAL-PRINTER-LOWER.cbl') as f:
+        content = f.read()
+    ast, vars, procs = parser.defined_names(content)
+    # 8 variables
+    assert len(vars) == 8
+    assert vars[0].name == 'fprinter'
