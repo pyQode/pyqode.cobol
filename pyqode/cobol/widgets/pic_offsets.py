@@ -15,7 +15,8 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
             try:
                 self._editor.offset_calculator.pic_infos_available.disconnect(
                     self._update)
-            except AttributeError:
+            except (AttributeError, RuntimeError):
+                # see github https://github.com/OpenCobolIDE/OpenCobolIDE/issues/89
                 pass
         self._editor = editor
         try:
