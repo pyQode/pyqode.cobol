@@ -56,8 +56,9 @@ class IndenterMode(Mode):
             cursor = QtGui.QTextCursor(block)
             indentation = TextHelper(self.editor).line_indent(block)
             if indentation < self.min_column:
-                nb_space_to_add = self.min_column - indentation
-                if block.text().strip().startswith('*'):
+                # align with at least 7th char
+                nb_space_to_add = self.min_column
+                if block.text().strip().startswith('*') and indentation == 0:
                     nb_space_to_add -= 1
             cursor.movePosition(cursor.StartOfLine, cursor.MoveAnchor)
             if self.editor.use_spaces_instead_of_tabs:
