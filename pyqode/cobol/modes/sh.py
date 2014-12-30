@@ -21,7 +21,7 @@ def make_cobol_patterns(fixed_format=True):
     keywords_reserved = any(
         'keyword_reserved',
         ['(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
-         '|'.join(kw.RESERVED)])
+         '|'.join(kw.RESERVED + kw.SQL_COBOL_KEYWORDS)])
     keywords = any(
         'keyword',
         [r'(^|(?<=[^0-9a-zA-Z_\-]))(%s)\s*($|(?=[^0-9a-zA-Z_\-]))' %
