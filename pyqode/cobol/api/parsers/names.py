@@ -186,6 +186,8 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
         # line not complete
         return None
     name = name.replace(".", "")
+    if name in ALL_KEYWORDS or name in ['-', '/']:
+        return None
     description = line
     if lvl == 1:
         parent_node = last_section_node
