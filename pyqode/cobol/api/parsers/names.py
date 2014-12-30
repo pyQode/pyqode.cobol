@@ -118,7 +118,10 @@ def parse_division(l, c, line, root_node, last_section_node):
     """
     name = line
     name = name.replace(".", "")
-    node = Name(Name.Type.Division, l, c, name)
+    # trim whitespaces/tabs between XXX and DIVISION
+    print(name)
+    tokens = [t for t in name.split(' ') if t]
+    node = Name(Name.Type.Division, l, c, '%s %s' % (tokens[0], tokens[1]))
     root_node.add_child(node)
     last_div_node = node
     # do not take previous sections into account
