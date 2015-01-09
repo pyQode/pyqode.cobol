@@ -1,4 +1,5 @@
 import os
+from pyqode.qt import PYQT4_API, PYSIDE_API
 from pyqode.qt.QtCore import QObject, Signal, Slot
 from pyqode.qt.QtGui import QIcon
 from pyqode.qt.QtWidgets import QAction
@@ -17,9 +18,11 @@ class OffsetCalculatorMode(QObject, Mode):
     pic_infos_available = Signal(list)
 
     def __init__(self):
-        if '4' in os.environ['QT_API']:
+        if os.environ['QT_API'] in (PYQT4_API + PYSIDE_API):
+            QObject.__init__(self)
             Mode.__init__(self)
-        super().__init__()
+        else:
+            super().__init__()
 
     def on_install(self, editor):
         super().on_install(editor)
