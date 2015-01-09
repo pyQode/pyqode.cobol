@@ -1,6 +1,20 @@
 Change log
 ==========
 
+2.4.1
+-----
+
+New features:
+
+- allow user to choose keyword completion convention: lower case or UPPER CASE
+- add support for editing .scb files (needed by the new minor version of OpenCobolIDE)
+
+Bug fixes:
+
+- fix linter confusion when switching from one tab to another very quicly (OpenCobolIDE/OpenCobolIDE#92)
+- fix indentation bug: keep formatting for character beyond col 7 in non-free COBOL
+- fixed a couple of bugs with the name parser: don't show END-EXEC, EXEC SQL, LVL 88 variables,...
+
 2.4.0
 -----
 
