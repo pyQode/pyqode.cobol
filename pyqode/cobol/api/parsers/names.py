@@ -179,8 +179,7 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
             lvl = int(tokens[0], 16)
         name = tokens[1]
     except ValueError:
-        lvl = 1
-        name = tokens[0]
+        return None
     except IndexError:
         # line not complete
         return None
@@ -200,6 +199,8 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
                 break
     if not parent_node:
         # malformed code
+        return None
+    if lvl == int('88', 16):
         return None
     node = Name(Name.Type.Variable, l, c, name, description)
     parent_node.add_child(node)

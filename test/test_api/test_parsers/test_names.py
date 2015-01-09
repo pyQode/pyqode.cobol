@@ -47,6 +47,16 @@ def test_variables():
     assert len(vars) == 8
 
 
+def test_lvl88():
+    """
+    See OpenCobolIDE/OpenCobolIDE#95, first comment
+    """
+    with open('test/testfiles/TEST_LVL_88.cbl') as f:
+        content = f.read()
+    ast, vars, procs = parser.defined_names(content)
+    assert len(vars) == 9
+
+
 def test_paragraphes():
     """
     Test printer must have 2 procedures
