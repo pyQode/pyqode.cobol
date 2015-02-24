@@ -4,26 +4,6 @@ from pyqode.qt.QtGui import QTextCursor
 from pyqode.core.api import Mode, TextHelper, TextDecoration, DelayJobRunner
 
 
-class Definition(object):
-    """
-    Symbol definition: name, line and column
-    """
-    def __init__(self, line, column, name):
-        #: Line number
-        self.line = line
-        #: Column number
-        self.column = column
-        self.name = name
-
-    def __str__(self):
-        if self.line and self.column:
-            return "%s (%s, %s)" % (self.name, self.line, self.column)
-        return self.name
-
-    def __repr__(self):
-        return "Definition(%r, %r, %r)" % (self.line, self.column, self.name)
-
-
 class GoToDefinitionMode(Mode, QObject):
     """
     Go to the definition of the symbol under the word cursor.

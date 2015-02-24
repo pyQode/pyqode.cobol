@@ -7,7 +7,9 @@ The code comes from OpenCobolIDE and has been left mostly intact.
 """
 import logging
 import re
+from pyqode.cobol.api import icons
 from pyqode.cobol.api.keywords import ALL_KEYWORDS
+from pyqode.core.share import Definition
 
 
 def _logger():
@@ -74,6 +76,22 @@ class Name(object):
         }
         return "%s(name=%s, line=%s, end_line=%s)" % (
             type_names[self.node_type], self.name, self.line, self.end_line)
+
+    def to_definition(self):
+        """
+        Converts the name instance to a pyqode.core.share.Definition
+        """
+        icon = {
+            Name.Type.Root: icons.ICON_MIMETYPE,
+            Name.Type.Division: icons.ICON_DIVISION,
+            Name.Type.Section: icons.ICON_SECTION,
+            Name.Type.Variable: icons.ICON_VAR,
+            Name.Type.Paragraph: icons.ICON_FUNC
+        }[self.node_type]
+        d = Definition(self.name, self.line, self.column, icon)
+        for ch in self.children:
+            d.add_child(ch.to_definition())
+        return d
 
 
 def cmp_name(first_node, second_node):

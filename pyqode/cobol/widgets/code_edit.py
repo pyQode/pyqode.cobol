@@ -4,6 +4,7 @@ This module contains the cobol code edit widget.
 import mimetypes
 import os
 import sys
+from pyqode.cobol.backend.workers import get_outline
 from pyqode.core import api, panels, modes
 from pyqode.core.backend import NotRunning
 from pyqode.core.managers import FileManager
@@ -86,8 +87,7 @@ class CobolCodeEdit(api.CodeEdit):
         self.auto_complete = self.modes.append(
             modes.AutoCompleteMode())
         self.outline_mode = self.modes.append(
-            cobmodes.DocumentOutlineMode()
-        )
+            modes.OutlineMode(get_outline))
         self.add_separator()
         self.goto_def_mode = self.modes.append(
             cobmodes.GoToDefinitionMode()

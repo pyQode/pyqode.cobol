@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO)
 import sys
 from pyqode.qt import QtCore, QtWidgets
 from pyqode.cobol.widgets import CobolCodeEdit
-from pyqode.cobol.widgets import OutlineTreeWidget
+from pyqode.core.widgets import OutlineTreeWidget
 from pyqode.cobol.widgets import PicOffsetsTable
 
 

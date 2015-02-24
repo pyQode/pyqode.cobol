@@ -67,3 +67,8 @@ class CobolCodeCompletionProvider:
         else:
             completions += self._kwds
         return completions
+
+
+def get_outline(data):
+    root_node, _, _ = defined_names(data['code'], free_format)
+    return [ch.to_definition().to_dict() for ch in root_node.children]
