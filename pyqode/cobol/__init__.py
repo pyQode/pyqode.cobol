@@ -4,4 +4,4 @@ Add cobol support to pyQode.
 Most of the code come from OpenCobolIDE.
 """
 
-__version__ = '2.4.1'
+__version__ = '2.5.0.dev0'
