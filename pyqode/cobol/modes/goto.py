@@ -71,10 +71,25 @@ class GoToDefinitionMode(Mode, QObject):
             if cursor and cursor.selectedText():
                 self._timer.request_job(self.word_clicked.emit, cursor)
 
+    def find_definition(self, symbol, definition):
+        if symbol in TextHelper(self.editor).line_text(definition.line):
+            return definition
+        for ch in definition.children:
+            d = self.find_definition(symbol, ch)
+            if d is not None:
+                return d
+        return None
+
     def select_word(self, cursor):
         symbol = cursor.selectedText()
         analyser = self.editor.outline_mode
-        node = analyser.root_node.find(symbol)
+        for definition in analyser.definitions:
+            node = self.find_definition(symbol, definition)
+            if node is not None:
+                break
+        else:
+            node = None
+        self._definition = None
         if node and node.line != cursor.block().blockNumber():
             self._definition = node
             if self._deco is None:
@@ -117,7 +132,8 @@ class GoToDefinitionMode(Mode, QObject):
                 select_whole_word=True)
         if not self._definition or isinstance(self.sender(), QAction):
             self.select_word(tc)
-        QTimer.singleShot(100, self._goto_def)
+        if self._definition is not None:
+            QTimer.singleShot(100, self._goto_def)
 
     def _goto_def(self):
         line = self._definition.line
