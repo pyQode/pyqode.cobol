@@ -49,7 +49,10 @@ class CommentsMode(Mode):
         for i in range(nb_lines):
             cursor.movePosition(QtGui.QTextCursor.StartOfLine)
             cursor.movePosition(QtGui.QTextCursor.EndOfLine, cursor.KeepAnchor)
-            line = cursor.selectedText().lstrip()
+            line = cursor.selectedText()
+            if not self.editor.free_format:
+                line = line[6:]
+            line = line.strip()
             if not line.startswith(comment_symbol):
                 comment = True
                 break
@@ -79,6 +82,8 @@ class CommentsMode(Mode):
             cursor.movePosition(QtGui.QTextCursor.StartOfLine)
             cursor.movePosition(QtGui.QTextCursor.EndOfLine, cursor.KeepAnchor)
             full_line = cursor.selectedText()
+            if not self.editor.free_format:
+                full_line = 6 * ' ' + full_line[6:]
             line = full_line.lstrip()
             indent = len(full_line) - len(line)
             if line != "":
