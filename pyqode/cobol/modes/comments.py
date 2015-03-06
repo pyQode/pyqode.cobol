@@ -114,7 +114,10 @@ class CommentsMode(Mode):
                 cursor.setPosition(cursor.position() + 1)
         cursor.endEditBlock()
         if has_selection:
-            cursor.setPosition(sel_start)
+            if comment:
+                cursor.setPosition(sel_start - len(comment_symbol))
+            else:
+                cursor.setPosition(sel_start + len(comment_symbol))
             cursor.setPosition(sel_end, QtGui.QTextCursor.KeepAnchor)
         else:
             if not cursor.atEnd():
