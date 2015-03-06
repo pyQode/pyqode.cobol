@@ -102,11 +102,12 @@ def test_comment_selection(editor, test_case):
 
 
 def test_key_pressed(editor):
-    editor.setPlainText('  DISPLAY "Hello".', '', '')
+    editor.free_format = False
+    editor.setPlainText('123456DISPLAY "Hello".', '', '')
     QTest.keyPress(editor, QtCore.Qt.Key_Slash, QtCore.Qt.ControlModifier)
-    assert editor.toPlainText() == '  *> DISPLAY "Hello".'
+    assert editor.toPlainText() == '123456*> DISPLAY "Hello".'
     QTest.keyPress(editor, QtCore.Qt.Key_Slash, QtCore.Qt.ControlModifier)
-    assert editor.toPlainText() == '  DISPLAY "Hello".'
+    assert editor.toPlainText() == '123456DISPLAY "Hello".'
 
 
 def test_disabled(editor):
