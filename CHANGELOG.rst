@@ -1,6 +1,15 @@
 Change log
 ==========
 
+2.5.0
+-----
+
+New features:
+    - Unified API for document outline (see pyQode/pyQode#24)
+
+Fixed bugs:
+    - fix comment/uncomment in fixed mode when the column 1-6 are not empty (see OpenCobolIDE/OpenCobolIDE#108)
+
 2.4.1
 -----
 
