@@ -54,7 +54,9 @@ class Context:
 
     def _load(self, file_path):
         with open(file_path) as file:
-            code = file.read()
+            code = file.readlines()
+        self.symbol = code[0].replace('symbol: ', '').replace('\n', '')
+        code = ''.join(code[1:])
         input_context, output_context = code.split('\n->\n')
         self.sel_start, self.sel_end = self._get_line_range(input_context)
         self.input_code = input_context.replace('|', '')
@@ -77,6 +79,7 @@ class Case:
         self.context = Context(file_path)
 
     def run(self, editor):
+        editor.comment_indicator = self.context.symbol
         editor.setPlainText(self.context.input_code, '', '')
         TextHelper(editor).select_lines(self.context.sel_start,
                                         self.context.sel_end)
@@ -103,6 +106,7 @@ def test_comment_selection(editor, test_case):
 
 def test_key_pressed(editor):
     editor.free_format = False
+    editor.comment_indicator = '*> '
     editor.setPlainText('123456DISPLAY "Hello".', '', '')
     QTest.keyPress(editor, QtCore.Qt.Key_Slash, QtCore.Qt.ControlModifier)
     assert editor.toPlainText() == '123456*> DISPLAY "Hello".'

@@ -85,7 +85,10 @@ class CommentsMode(Mode):
             if not self.editor.free_format:
                 full_line = 6 * ' ' + full_line[6:]
             line = full_line.lstrip()
-            indent = len(full_line) - len(line)
+            if comment_symbol.strip() == '*':
+                indent = 6
+            else:
+                indent = len(full_line) - len(line)
             if line != "":
                 cursor.movePosition(QtGui.QTextCursor.StartOfLine)
                 # Uncomment
