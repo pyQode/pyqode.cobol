@@ -3,6 +3,7 @@
 """
 This setup script packages pyqode.python
 """
+import sys
 from setuptools import setup, find_packages
 from pyqode.cobol import __version__
 
@@ -19,7 +20,12 @@ except ImportError:
     cmdclass = {}
 
 
+DESCRIPTION = 'Adds COBOL support to pyqode.core'
+
+
 def readme():
+    if 'bdist_deb' in sys.argv:
+        return DESCRIPTION
     return str(open('README.rst').read())
 
 
@@ -36,11 +42,11 @@ setup(
     packages=[p for p in find_packages() if 'test' not in p],
     keywords=["CodeEdit PySide PyQt code editor widget cobol"],
     package_dir={'pyqode': 'pyqode'},
-    url='https://github.com/pyQode/pyqode.python',
+    url='https://github.com/pyQode/pyqode.cobol',
     license='MIT',
     author='Colin Duquesnoy',
     author_email='colin.duquesnoy@gmail.com',
-    description='Add COBOL support to pyQode',
+    description=DESCRIPTION,
     long_description=readme(),
     install_requires=requirements,
     zip_safe=False,
