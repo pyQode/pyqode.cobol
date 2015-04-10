@@ -166,9 +166,11 @@ class CobolCodeEdit(api.CodeEdit):
     def _update_backend_proposed_kw_case(self):
         from pyqode.cobol.backend.workers import set_lower_case_keywords
         try:
-            self.backend.send_request(set_lower_case_keywords, self.lower_case_keywords)
+            self.backend.send_request(set_lower_case_keywords,
+                                      self.lower_case_keywords)
         except NotRunning:
-            QtCore.QTimer.singleShot(100, self._update_backend_proposed_kw_case)
+            QtCore.QTimer.singleShot(
+                100, self._update_backend_proposed_kw_case)
 
 for ext in CobolCodeEdit.extensions:
     mimetypes.add_type(CobolCodeEdit.mimetypes[0], ext)

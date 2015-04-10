@@ -11,7 +11,7 @@ import logging
 import os
 import sys
 import pytest
-
+from pyqode.qt.QtWidgets import QApplication
 
 try:
     import faulthandler
@@ -43,7 +43,6 @@ logging.basicConfig(level=logging.INFO,
 # Setup QApplication
 # -------------------
 # 2. create qt application
-from pyqode.qt.QtWidgets import QApplication
 _app = QApplication(sys.argv)
 _widget = None
 
