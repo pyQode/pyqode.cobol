@@ -71,6 +71,9 @@ class CobolCodeEdit(api.CodeEdit):
         self._start_server()
         self._setup_panels()
         self._setup_modes()
+        self.encoding_panel = self.panels.append(
+            panels.EncodingPanel(), api.Panel.Position.TOP
+        )
         self.indenter_mode.min_column = 7
 
     def _start_server(self):
@@ -84,6 +87,12 @@ class CobolCodeEdit(api.CodeEdit):
             self.backend.start(server.__file__)
 
     def _setup_modes(self):
+        self.extended_selection_mode = self.modes.append(
+            modes.ExtendedSelectionMode()
+        )
+        self.case_converter = self.modes.append(
+            modes.CaseConverterMode()
+        )
         self.auto_complete = self.modes.append(
             modes.AutoCompleteMode())
         self.outline_mode = self.modes.append(
@@ -120,11 +129,6 @@ class CobolCodeEdit(api.CodeEdit):
         self.right_margin = self.modes.append(modes.RightMarginMode())
         self.right_margin.position = 72
         self.comments_mode = self.modes.append(cobmodes.CommentsMode())
-        self.add_separator()
-        self.case_converter = self.modes.append(
-            modes.CaseConverterMode()
-        )
-        self.add_separator()
         self.offset_calculator = self.modes.append(
             cobmodes.OffsetCalculatorMode())
         self.occurences_highlighter_mode = self.modes.append(
@@ -133,11 +137,11 @@ class CobolCodeEdit(api.CodeEdit):
         self.backspace_mode = self.modes.append(
             cobmodes.SmartBackSpaceMode()
         )
-        self.extended_selection_mode = self.modes.append(
-            modes.ExtendedSelectionMode()
-        )
 
     def _setup_panels(self):
+        self.search_panel = self.panels.append(
+            panels.SearchAndReplacePanel(), api.Panel.Position.BOTTOM
+        )
         self.folding_panel = self.panels.append(
             panels.FoldingPanel(), api.Panel.Position.LEFT
         )
@@ -146,12 +150,6 @@ class CobolCodeEdit(api.CodeEdit):
         )
         self.checker_panel = self.panels.append(
             panels.CheckerPanel(), api.Panel.Position.LEFT
-        )
-        self.encoding_panel = self.panels.append(
-            panels.EncodingPanel(), api.Panel.Position.TOP
-        )
-        self.search_panel = self.panels.append(
-            panels.SearchAndReplacePanel(), api.Panel.Position.BOTTOM
         )
         self.global_checker_panel = self.panels.append(
             panels.GlobalCheckerPanel(), api.Panel.Position.RIGHT)
