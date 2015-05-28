@@ -294,14 +294,14 @@ def defined_names(code, free_format=False):
         if not line.isspace() and not line.strip().startswith("*"):
             line = line.strip()
             # DIVISIONS
-            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?\.$', line.upper()):
+            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?.*\.$', line.upper()):
                 # remember
                 if last_div_node is not None:
                     last_div_node.end_line = i
                 last_div_node, last_section_node = parse_division(
                     i, column, line, root_node, last_section_node)
             # SECTIONS
-            elif line.upper().strip().endswith('SECTION.'):
+            elif re.match(r'.*SECTION.*\.$', line.upper()):
                 if last_section_node:
                     last_section_node.end_line = i
                 last_section_node = parse_section(
