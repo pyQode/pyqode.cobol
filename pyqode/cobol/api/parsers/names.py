@@ -49,6 +49,7 @@ class Name(object):
         :param child: The child node to add
         """
         self.children.append(child)
+        child.parent = self
 
     def find(self, name):
         """
@@ -88,7 +89,7 @@ class Name(object):
             Name.Type.Variable: icons.ICON_VAR,
             Name.Type.Paragraph: icons.ICON_FUNC
         }[self.node_type]
-        d = Definition(self.name, self.line, self.column, icon)
+        d = Definition(self.name, self.line, self.column, icon, self.description)
         for ch in self.children:
             d.add_child(ch.to_definition())
         return d
@@ -204,7 +205,17 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
     name = name.replace(".", "")
     if name in ALL_KEYWORDS or name in ['-', '/']:
         return None
-    description = line
+    m = re.findall(r'pic.*\.', line, re.IGNORECASE)
+    if m:
+        description = ' '.join([t for t in m[0].split(' ') if t])
+        try:
+            index = description.lower().index('value')
+        except ValueError:
+            description.replace('.', '')
+        else:
+            description = description[:index]
+    else:
+        description = ''
     if lvl == 1:
         parent_node = last_section_node
         last_vars.clear()
@@ -322,4 +333,10 @@ def defined_names(code, free_format=False):
         last_div_node.end_line = len(lines)
     if root_node and last_div_node:
         root_node.end_line = last_div_node.end_line
+
     return root_node, variables, paragraphs
+
+
+if __name__ == '__main__':
+    with open('/home/colin/Documents/OpenCobolIDE/test/testfiles/TEST-PRINTER.cbl') as f:
+        defined_names(f.read())
