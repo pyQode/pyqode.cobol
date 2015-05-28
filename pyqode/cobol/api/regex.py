@@ -15,3 +15,7 @@ LOOP_PATTERN = QtCore.QRegExp(r'PERFORM.+(UNTIL|TIMES){1}')
 BRANCH_START = QtCore.QRegExp(r'((^|\s)IF\b|ELSE)')
 #: This pattern identifies the end of a branch
 BRANCH_END = QtCore.QRegExp(r'END-\w*$')
+#: This pattern identifiers a DIVISION
+DIVISION = QtCore.QRegExp(r'.*DIVISION( USING [a-zA-Z-]*)?.*\.$')
+#: This pattern identifiers a SECTION
+SECTION = QtCore.QRegExp(r'.*SECTION.*\.$')

@@ -23,7 +23,10 @@ class CobolFoldDetector(FoldDetector):
         if not prev_block:
             return 0
         ctext, ptext = self.stripped_texts(block, prev_block)
-        if ctext.endswith('DIVISION.'):
+        if not self.editor.free_format:
+            ctext = ' ' * 6 + ctext[7:]
+            ptext = ' ' * 6 + ptext[7:]
+        if regex.DIVISION.indexIn(ctext) != -1:
             if 'DATA' in ctext:
                 self.data_division = block
                 self._data_div_txt = block.text()
@@ -31,7 +34,7 @@ class CobolFoldDetector(FoldDetector):
                 self.proc_division = block
                 self._proc_div_txt = block.text()
             return 0
-        elif ctext.endswith('SECTION.'):
+        elif regex.SECTION.indexIn(ctext) != -1:
             return 1
         elif ptext.endswith('DIVISION.'):
             return 1

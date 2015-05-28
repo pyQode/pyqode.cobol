@@ -10,6 +10,7 @@ import re
 from pyqode.cobol.api import icons
 from pyqode.cobol.api.keywords import ALL_KEYWORDS
 from pyqode.core.share import Definition
+from pyqode.cobol.api import regex
 
 
 def _logger():
@@ -294,14 +295,14 @@ def defined_names(code, free_format=False):
         if not line.isspace() and not line.strip().startswith("*"):
             line = line.strip()
             # DIVISIONS
-            if re.match(r'.*DIVISION( USING [a-zA-Z-]*)?.*\.$', line.upper()):
+            if regex.DIVISION.indexIn(line) != -1:
                 # remember
                 if last_div_node is not None:
                     last_div_node.end_line = i
                 last_div_node, last_section_node = parse_division(
                     i, column, line, root_node, last_section_node)
             # SECTIONS
-            elif re.match(r'.*SECTION.*\.$', line.upper()):
+            elif regex.SECTION.indexIn(line) != -1:
                 if last_section_node:
                     last_section_node.end_line = i
                 last_section_node = parse_section(
