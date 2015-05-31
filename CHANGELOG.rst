@@ -1,6 +1,20 @@
 Change log
 ==========
 
+2.6.1
+-----
+
+Improvements:
+    - Show picture information in outline widget
+    - Improve linux icon theme integration (icon like code-variable,
+      code-function will be fetched from icon theme if the theme has theme,
+      e.g. on plasma 5 with breeze icon theme)
+
+Fixed bugs:
+    - Fix division/section not correctly recognized in case where the user
+      added some spaces before the keyword and the period
+    - Fix auto-indent of file where column 1-6 are not empty
+
 2.6.0
 ------
 
