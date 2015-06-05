@@ -21,7 +21,7 @@ class GoToDefinitionMode(Mode, QObject):
         self._deco = None
         self._pending = False
         self.action_goto = QAction("Go to assignments", self)
-        self.action_goto.setShortcut('F3')
+        self.action_goto.setShortcut('F8')
         self.action_goto.triggered.connect(self.request_goto)
         self.word_clicked.connect(self.request_goto)
         self._timer = DelayJobRunner(delay=200)
