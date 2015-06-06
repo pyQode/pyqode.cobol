@@ -21,7 +21,7 @@ class GoToDefinitionMode(Mode, QObject):
         self._deco = None
         self._pending = False
         self.action_goto = QAction("Go to assignments", self)
-        self.action_goto.setShortcut('F8')
+        self.action_goto.setShortcut('F7')
         self.action_goto.triggered.connect(self.request_goto)
         self.word_clicked.connect(self.request_goto)
         self._timer = DelayJobRunner(delay=200)
@@ -31,6 +31,7 @@ class GoToDefinitionMode(Mode, QObject):
         Connects/disconnects slots to/from signals when the mode state
         changed.
         """
+        super(GoToDefinitionMode, self).on_state_changed(state)
         if state:
             self.editor.mouse_moved.connect(self._on_mouse_moved)
             self.editor.mouse_pressed.connect(self._on_mouse_pressed)
@@ -127,6 +128,7 @@ class GoToDefinitionMode(Mode, QObject):
                    the text cursor.
         :type tc: QtGui.QTextCursor
         """
+        print('request goto')
         if not tc:
             tc = TextHelper(self.editor).word_under_cursor(
                 select_whole_word=True)
