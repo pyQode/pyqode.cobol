@@ -1,6 +1,12 @@
 Change log
 ==========
 
+2.6.2
+-----
+
+Fixed bugs:
+    - Fix conflicting goto shortuct: use F7 instead of F3 which is already used by the search & replace panel.
+
 2.6.1
 -----
 
