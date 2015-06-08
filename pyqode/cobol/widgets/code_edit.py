@@ -87,6 +87,7 @@ class CobolCodeEdit(api.CodeEdit):
             self.backend.start(server.__file__)
 
     def _setup_modes(self):
+        self.cursor_history = self.modes.append(modes.CursorHistoryMode())
         self.extended_selection_mode = self.modes.append(
             modes.ExtendedSelectionMode()
         )
