@@ -32,9 +32,9 @@ class CobolPatterns:
     row_pattern = re.compile(
         row_pattern_base +
         opt_pattern_format.format(row_pattern_redefines) +
+        opt_pattern_format.format(row_pattern_pic) +
         opt_pattern_format.format(row_pattern_occurs) +
         opt_pattern_format.format(row_pattern_indexed_by) +
-        opt_pattern_format.format(row_pattern_pic) +
         row_pattern_end
     )
 
@@ -285,4 +285,5 @@ def clean_names(lines, ensure_unique_names=False, strip_prefix=False,
 
 def process_cobol(lines):
     return clean_names(denormalize_cobol(parse_cobol(clean_cobol(lines))),
-                       True, True, True)
+                       ensure_unique_names=True, strip_prefix=False,
+                       make_database_safe=False)
