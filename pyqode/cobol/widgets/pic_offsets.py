@@ -12,6 +12,9 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
         self.setColumnCount(4)
         self.setHorizontalHeaderLabels(
             ['Level', 'Name', 'Offset', 'PIC'])
+        self.setEditTriggers(self.NoEditTriggers)
+        self.setSelectionBehavior(self.SelectRows)
+        self.setSelectionMode(self.SingleSelection)
 
     def set_editor(self, editor):
         if self._editor is not None:
