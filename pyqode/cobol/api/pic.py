@@ -69,7 +69,7 @@ def get_field_infos(code):
         # compute offset of next PIC field.
         if row['pic']:
             offset += row['pic_info']['length']
-        else:
+        elif row['level'] not in [78, 88]:
             offset += 1
 
     return field_infos

@@ -9,6 +9,12 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
         self._update([])
         self._editor = None
         self.verticalHeader().setVisible(False)
+        self.setColumnCount(4)
+        self.setHorizontalHeaderLabels(
+            ['Level', 'Name', 'Offset', 'PIC'])
+        self.setEditTriggers(self.NoEditTriggers)
+        self.setSelectionBehavior(self.SelectRows)
+        self.setSelectionMode(self.SingleSelection)
 
     def set_editor(self, editor):
         if self._editor is not None:
@@ -26,23 +32,9 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
             pass
 
     def _update(self, infos):
-        self.clear()
+        self.clearContents()
         self.setRowCount(len(infos))
-        self.setColumnCount(4)
-        self.setHorizontalHeaderLabels(
-            ['Level', 'Name', 'Offset', 'PIC'])
-        try:
-            # PyQt4
-            self.horizontalHeader().setResizeMode(
-                QtWidgets.QHeaderView.ResizeToContents)
-            self.horizontalHeader().setResizeMode(
-                1, QtWidgets.QHeaderView.Stretch)
-        except AttributeError:
-            # PyQt5
-            self.horizontalHeader().setSectionResizeMode(
-                QtWidgets.QHeaderView.ResizeToContents)
-            self.horizontalHeader().setSectionResizeMode(
-                QtWidgets.QHeaderView.Stretch)
+
         # process each info in a separate row
         for i, info in enumerate(infos):
             self.setItem(
@@ -53,4 +45,6 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
                 i, 2, QtWidgets.QTableWidgetItem("%s" % info.offset))
             self.setItem(
                 i, 3, QtWidgets.QTableWidgetItem(info.pic))
+        self.setSortingEnabled(False)
+
         self.show_requested.emit()
