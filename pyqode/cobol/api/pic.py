@@ -55,21 +55,44 @@ def get_field_infos(code):
     field_infos = []
     lines = _clean_code(code)
 
+    previous_offset = 0
+
     for row in process_cobol(lines):
         fi = PicFieldInfo()
-        fi.offset = offset
         fi.name = row["name"]
         fi.level = row["level"]
         fi.pic = row["pic"]
         fi.occurs = row["occurs"]
         fi.redefines = row["redefines"]
         fi.indexed_by = row["indexed_by"]
+
+        # find item that was redefined and use its offset
+        if fi.redefines:
+            for fib in field_infos:
+                if fib.name == fi.redefines:
+                    offset = fib.offset
+
+        # level 1 should have their offset set to 1
+        if fi.level == 1:
+            offset = 1
+
+        # level 78 have no offset
+        if fi.level == 78:
+            offset = 0
+
+        # set item offset
+        fi.offset = offset
+
+        # special case: level 88 have the same level as its parent
+        if fi.level == 88:
+            fi.offset = previous_offset
+        else:
+            previous_offset = offset
+
         field_infos.append(fi)
 
         # compute offset of next PIC field.
         if row['pic']:
             offset += row['pic_info']['length']
-        elif row['level'] not in [78, 88]:
-            offset += 1
 
     return field_infos

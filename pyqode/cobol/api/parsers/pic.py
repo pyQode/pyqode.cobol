@@ -23,10 +23,10 @@ class CobolPatterns:
     opt_pattern_format = "({})?"
 
     row_pattern_base = r'^(?P<level>\d{2})\s+(?P<name>\S+)'
-    row_pattern_occurs = r'\s+OCCURS (?P<occurs>\d+) TIMES'
-    row_pattern_indexed_by = r"\s+INDEXED BY\s(?P<indexed_by>\S+)"
     row_pattern_redefines = r"\s+REDEFINES\s(?P<redefines>\S+)"
     row_pattern_pic = r'\s+PIC\s+(?P<pic>\S+)'
+    row_pattern_occurs = r'\s+OCCURS (?P<occurs>\d+) TIMES'
+    row_pattern_indexed_by = r"\s+INDEXED BY\s(?P<indexed_by>\S+)"
     row_pattern_end = r'\.$'
 
     row_pattern = re.compile(
@@ -35,7 +35,7 @@ class CobolPatterns:
         opt_pattern_format.format(row_pattern_pic) +
         opt_pattern_format.format(row_pattern_occurs) +
         opt_pattern_format.format(row_pattern_indexed_by) +
-        row_pattern_end
+        row_pattern_end, re.IGNORECASE
     )
 
     pic_pattern_repeats = re.compile(r'(.)\((\d+)\)')
@@ -116,7 +116,8 @@ def parse_cobol(lines):
     Parses the COBOL
      - converts the COBOL line into a dictionary containing the information
      - parses the pic information into type, length, precision
-     - handles redefines
+     - ~~handles redefines~~ -> our implementation does not do that anymore
+       because we want to display item that was redefined.
     """
     output = []
 
@@ -137,27 +138,6 @@ def parse_cobol(lines):
 
         if match['pic'] is not None:
             match['pic_info'] = parse_pic_string(match['pic'])
-
-        if match['redefines'] is not None:
-            # Find item that is being redefined.
-            try:
-                redefined_item_index, redefined_item = [
-                    (index, item) for index, item in enumerate(output)
-                    if item['name'] == match['redefines']
-                ][0]
-
-                related_group = get_subgroup(
-                    redefined_item['level'], output[redefined_item_index + 1:])
-
-                output = (output[:redefined_item_index] +
-                          output[redefined_item_index +
-                                 len(related_group) + 1:])
-
-                match['redefines'] = None
-            except IndexError:
-                _logger().warning(
-                    "Could not find the field to be redefined ({}) for row: "
-                    "{}".format(match['redefines'], row.strip()))
 
         output.append(match)
     return output
@@ -285,5 +265,5 @@ def clean_names(lines, ensure_unique_names=False, strip_prefix=False,
 
 def process_cobol(lines):
     return clean_names(denormalize_cobol(parse_cobol(clean_cobol(lines))),
-                       ensure_unique_names=True, strip_prefix=False,
+                       ensure_unique_names=False, strip_prefix=False,
                        make_database_safe=False)
