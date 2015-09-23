@@ -1,12 +1,22 @@
 Change log
 ==========
 
-2.6.2
+2.6.4
+------
+
+Fixed bugs:
+    - Fix a few bugs in the offset calculator:
+        - lvl 78/88 variables and "redefines" are properly handled
+        - sorting items does not make sense, so it is now disabled. This fix
+          a sever GUI bug if user sorted the items before running a new
+          computation
+
+2.6.3
 -----
 
 Fixed bugs:
     - Fix pic field regex missing ``OCCURS`` and ``INDEXED BY``
-    
+
 2.6.2
 -----
 
