@@ -71,3 +71,19 @@ def test_advanced():
     assert len(infos) == len(results)
     for info, result in zip(infos, results):
         assert info.offset == result
+
+
+name_sample = """
+       01  PIC-X10.
+           05 FILLER                   PIC X(2).
+           05 PIC-X8                   PIC X(8).
+"""
+
+
+def test_name():
+    """
+    Test if the part "PIC-" from PIC-X8 is not omitted.
+    """
+    infos = get_field_infos(name_sample)
+    assert len(infos) == 3
+    assert infos[-1].name == 'PIC-X8'
