@@ -24,6 +24,7 @@ source = """       01 INPUT-DATA.
            05 U1-HDL1 PIC X(04).
            05 FILLER PIC X(01).
            05 U1-HDL2 PIC X(04).
+
            05 FILLER PIC X(01).
 """
 
@@ -87,3 +88,15 @@ def test_name():
     infos = get_field_infos(name_sample)
     assert len(infos) == 3
     assert infos[-1].name == 'PIC-X8'
+
+
+comp_fields_sample = "       01  Right-Nibble         COMP-5 PIC 9(1)."
+
+
+def test_comp_fields():
+    """
+    Test if the part "PIC-" from PIC-X8 is not omitted.
+    """
+    infos = get_field_infos(comp_fields_sample)
+    assert len(infos) == 1
+    assert infos[0].name == 'Right-Nibble'
