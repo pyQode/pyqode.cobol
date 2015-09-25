@@ -36,7 +36,7 @@ def _clean_code(code):
         tokens = l.split(" ")
         while "" in tokens:
             tokens.remove("")
-        if not tokens[-1].endswith("."):
+        if tokens and not tokens[-1].endswith("."):
             tokens[-1] += "."
         lines.append(" " * indent + " ".join(tokens))
 
