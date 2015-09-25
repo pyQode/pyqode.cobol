@@ -24,7 +24,7 @@ class CobolPatterns:
 
     row_pattern_base = r'^(?P<level>\d{2})\s+(?P<name>\S+)'
     row_pattern_redefines = r"\s+REDEFINES\s(?P<redefines>\S+)"
-    row_pattern_pic = r'\s+PIC\s+(?P<pic>\S+)'
+    row_pattern_pic = r'\s+(COMP-\d\s+)?PIC\s+(?P<pic>\S+)'
     row_pattern_occurs = r'\s+OCCURS (?P<occurs>\d+) TIMES'
     row_pattern_indexed_by = r"\s+INDEXED BY\s(?P<indexed_by>\S+)"
     row_pattern_end = r'\.$'
