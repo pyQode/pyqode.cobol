@@ -74,6 +74,9 @@ class CobolCodeEdit(api.CodeEdit):
         self.encoding_panel = self.panels.append(
             panels.EncodingPanel(), api.Panel.Position.TOP
         )
+        self.read_only_panel = self.panels.append(
+            panels.ReadOnlyPanel(), api.Panel.Position.TOP
+        )
         self.indenter_mode.min_column = 7
 
     def _start_server(self):
