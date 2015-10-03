@@ -32,7 +32,7 @@ class OffsetCalculatorMode(QObject, Mode):
         self.action.setShortcut('Ctrl+Shift+O')
         self.action.setToolTip('Compute the PIC offset of the fields in the '
                                'selected text')
-        editor.add_action(self.action)
+        editor.add_action(self.action, sub_menu='COBOL')
         self.action.triggered.connect(self._compute_offsets)
 
     @Slot()
