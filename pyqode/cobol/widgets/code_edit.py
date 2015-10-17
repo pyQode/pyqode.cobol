@@ -89,6 +89,36 @@ class CobolCodeEdit(api.CodeEdit):
         else:
             self.backend.start(server.__file__)
 
+    def close(self, *args, **kwargs):
+        self.cursor_history = None
+        self.extended_selection_mode = None
+        self.case_converter = None
+        self.auto_complete = None
+        self.outline_mode = None
+        self.add_separator()
+        self.goto_def_mode = None
+        self.code_completion_mode = None
+        self.file_watcher = None
+        self.auto_indent_mode = None
+        self.caret_line_mode = None
+        self.zoom_mode = None
+        self.indenter_mode = None
+        self.auto_indent_mode = None
+        self.left_margin = None
+        self.right_margin = None
+        self.comments_mode = None
+        self.offset_calculator = None
+        self.occurences_highlighter_mode = None
+        self.backspace_mode = None
+        self.search_panel = None
+        self.folding_panel = None
+        self.line_nbr_panel = None
+        self.checker_panel = None
+        self.global_checker_panel = None
+        self.encoding_panel = None
+        self.read_only_panel = None
+        super().close(*args, **kwargs)
+
     def _setup_modes(self, color_scheme):
         self.cursor_history = self.modes.append(modes.CursorHistoryMode())
         self.extended_selection_mode = self.modes.append(
