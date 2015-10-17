@@ -1,3 +1,4 @@
+import weakref
 from pyqode.qt import QtCore, QtWidgets
 
 
@@ -21,10 +22,10 @@ class PicOffsetsTable(QtWidgets.QTableWidget):
             try:
                 self._editor.offset_calculator.pic_infos_available.disconnect(
                     self._update)
-            except (AttributeError, RuntimeError):
+            except (AttributeError, RuntimeError, ReferenceError):
                 # see https://github.com/OpenCobolIDE/OpenCobolIDE/issues/89
                 pass
-        self._editor = editor
+        self._editor = weakref.proxy(editor) if editor else editor
         try:
             self._editor.offset_calculator.pic_infos_available.connect(
                 self._update)
