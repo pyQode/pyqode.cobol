@@ -25,7 +25,7 @@ class CommentsMode(Mode):
             self.action = QtWidgets.QAction("Comment/Uncomment", self.editor)
             self.action.setShortcut("Ctrl+/")
             self.action.triggered.connect(self.comment)
-            self.editor.add_action(self.action)
+            self.editor.add_action(self.action, sub_menu='COBOL')
             # workaround numpad shortcuts not received with Qt5 (they have an
             # accepted bug report for that)
             # TODO: check if we can disable this workaround in a later version
@@ -33,7 +33,7 @@ class CommentsMode(Mode):
             if 'pyqt5' in os.environ['QT_API'].lower():
                 self.editor.key_pressed.connect(self.on_key_pressed)
         else:
-            self.editor.remove_action(self.action)
+            self.editor.remove_action(self.action, sub_menu='Python')
             if 'pyqt5' in os.environ['QT_API'].lower():
                 self.editor.key_pressed.disconnect(self.on_key_pressed)
 

@@ -1,15 +1,28 @@
 Change log
 ==========
 
-2.6.4
-------
+2.7.0
+-----
+
+New features:
+    - add the new cursor history mode to the cobol editor
+    - add the new read only panel to the cobol editor
+    - add color_scheme argument to code editor constructor
 
 Fixed bugs:
-    - Fix a few bugs in the offset calculator:
-        - lvl 78/88 variables and "redefines" are properly handled
-        - sorting items does not make sense, so it is now disabled. This fix
-          a sever GUI bug if user sorted the items before running a new
-          computation
+    - fix many potential memory leaks by breaking the circular dependencies
+      correctly before removing a mode/panel
+
+2.6.4
+-----
+
+Improvements:
+    - OffsetCalculator: allow user to resize columns
+    - OffsetCalculator: handle REDEFINES and COMP fields
+
+Fixed bugs:
+    - OffsetCalculator: fix wrong offset calculation for lvl 78/88
+    - OffsetCalculator: fix some gui bugs
 
 2.6.3
 -----

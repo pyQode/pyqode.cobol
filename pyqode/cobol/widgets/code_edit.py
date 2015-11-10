@@ -61,7 +61,7 @@ class CobolCodeEdit(api.CodeEdit):
     def comment_indicator(self, value):
         self._comment_indicator = value
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, color_scheme='qt'):
         super().__init__(parent)
         self.file = self.CobolFileManager(self)
         self._lower_case_keywords = False
@@ -70,9 +70,12 @@ class CobolCodeEdit(api.CodeEdit):
         self.word_separators.remove('-')
         self._start_server()
         self._setup_panels()
-        self._setup_modes()
+        self._setup_modes(color_scheme)
         self.encoding_panel = self.panels.append(
             panels.EncodingPanel(), api.Panel.Position.TOP
+        )
+        self.read_only_panel = self.panels.append(
+            panels.ReadOnlyPanel(), api.Panel.Position.TOP
         )
         self.indenter_mode.min_column = 7
 
@@ -86,7 +89,38 @@ class CobolCodeEdit(api.CodeEdit):
         else:
             self.backend.start(server.__file__)
 
-    def _setup_modes(self):
+    def close(self, *args, **kwargs):
+        self.cursor_history = None
+        self.extended_selection_mode = None
+        self.case_converter = None
+        self.auto_complete = None
+        self.outline_mode = None
+        self.add_separator()
+        self.goto_def_mode = None
+        self.code_completion_mode = None
+        self.file_watcher = None
+        self.auto_indent_mode = None
+        self.caret_line_mode = None
+        self.zoom_mode = None
+        self.indenter_mode = None
+        self.auto_indent_mode = None
+        self.left_margin = None
+        self.right_margin = None
+        self.comments_mode = None
+        self.offset_calculator = None
+        self.occurences_highlighter_mode = None
+        self.backspace_mode = None
+        self.search_panel = None
+        self.folding_panel = None
+        self.line_nbr_panel = None
+        self.checker_panel = None
+        self.global_checker_panel = None
+        self.encoding_panel = None
+        self.read_only_panel = None
+        super().close(*args, **kwargs)
+
+    def _setup_modes(self, color_scheme):
+        self.cursor_history = self.modes.append(modes.CursorHistoryMode())
         self.extended_selection_mode = self.modes.append(
             modes.ExtendedSelectionMode()
         )
@@ -123,7 +157,8 @@ class CobolCodeEdit(api.CodeEdit):
         self.auto_indent_mode = self.modes.append(
             modes.AutoIndentMode()
         )
-        self.modes.append(cobmodes.CobolSyntaxHighlighter(self.document()))
+        self.modes.append(cobmodes.CobolSyntaxHighlighter(
+            self.document(), color_scheme=api.ColorScheme(color_scheme)))
         self.syntax_highlighter.fold_detector = CobolFoldDetector()
         self.left_margin = self.modes.append(cobmodes.LeftMarginMode())
         self.right_margin = self.modes.append(modes.RightMarginMode())
