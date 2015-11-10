@@ -23,8 +23,8 @@ install:
   - if [ $QT_API = "pyqt5" ]; then
     sudo apt-get install -qq python3-pyqt5 --fix-missing;
     fi
-  - pip install --quiet git+https://github.com/pyQode/pyqode.qt.git@dev
-  - pip install --quiet git+https://github.com/pyQode/pyqode.core.git@dev
+  - pip install --quiet git+https://github.com/pyQode/pyqode.qt.git
+  - pip install --quiet git+https://github.com/pyQode/pyqode.core.git
 script:
   - pip install --quiet .
   - if [ $QT_API ]; then
