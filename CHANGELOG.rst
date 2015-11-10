@@ -1,12 +1,35 @@
 Change log
 ==========
 
-2.6.2
+2.7.0
+-----
+
+New features:
+    - add the new cursor history mode to the cobol editor
+    - add the new read only panel to the cobol editor
+    - add color_scheme argument to code editor constructor
+
+Fixed bugs:
+    - fix many potential memory leaks by breaking the circular dependencies
+      correctly before removing a mode/panel
+
+2.6.4
+-----
+
+Improvements:
+    - OffsetCalculator: allow user to resize columns
+    - OffsetCalculator: handle REDEFINES and COMP fields
+
+Fixed bugs:
+    - OffsetCalculator: fix wrong offset calculation for lvl 78/88
+    - OffsetCalculator: fix some gui bugs
+
+2.6.3
 -----
 
 Fixed bugs:
     - Fix pic field regex missing ``OCCURS`` and ``INDEXED BY``
-    
+
 2.6.2
 -----
 
