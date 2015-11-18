@@ -48,6 +48,6 @@ class OffsetCalculatorMode(QObject, Mode):
         th = TextHelper(self.editor)
         th.select_lines(start=start_line, end=end_line, apply_selection=True)
         source = th.selected_text()
-        results = get_field_infos(source)
+        results = get_field_infos(source, self.editor.free_format)
         self.editor.setTextCursor(original_tc)
         self.pic_infos_available.emit(results)

@@ -27,7 +27,8 @@ def _clean_code(code):
     # cleanup lines, the parser is very sensitive to extra spaces,...
     for l in code.splitlines():
         # remove last .
-        l = l[:-1]
+        if l.endswith('.'):
+            l = l[:-1]
         # the parser doe not like VALUE xxx.
         if "VALUE" in l:
             l = l[:l.find("VALUE")]
@@ -43,7 +44,7 @@ def _clean_code(code):
     return lines
 
 
-def get_field_infos(code):
+def get_field_infos(code, free_format):
     """
     Gets the list of pic fields information from line |start| to line |end|.
 
@@ -57,7 +58,7 @@ def get_field_infos(code):
 
     previous_offset = 0
 
-    for row in process_cobol(lines):
+    for row in process_cobol(lines, free_format):
         fi = PicFieldInfo()
         fi.name = row["name"]
         fi.level = row["level"]
@@ -79,6 +80,10 @@ def get_field_infos(code):
         # level 78 have no offset
         if fi.level == 78:
             offset = 0
+
+        # level 77 have offset always to 1
+        if fi.level == 77:
+            offset = 1
 
         # set item offset
         fi.offset = offset

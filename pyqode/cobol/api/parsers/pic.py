@@ -22,7 +22,7 @@ def _logger():
 class CobolPatterns:
     opt_pattern_format = "({})?"
 
-    row_pattern_base = r'^(?P<level>\d{2})\s+(?P<name>\S+)'
+    row_pattern_base = r'^(?P<level>\d{2})\s*(?P<name>\S+)'
     row_pattern_redefines = r"\s+REDEFINES\s(?P<redefines>\S+)"
     row_pattern_pic = r'\s+(COMP-\d\s+)?PIC\s+(?P<pic>\S+)'
     row_pattern_occurs = r'\s+OCCURS (?P<occurs>\d+) TIMES'
@@ -68,7 +68,6 @@ def parse_pic_string(pic_str):
     # Handle signed
     if pic_str[0] == "S":
         data_type = "Signed " + data_type
-        pic_str = pic_str[1:]
 
     # Handle precision
     decimal_pos = 0
@@ -85,13 +84,14 @@ def parse_pic_string(pic_str):
 
 
 # Cleans the COBOL by converting the cobol information to single lines
-def clean_cobol(lines):
+def clean_cobol(lines, free_format):
     holder = []
 
     output = []
 
     for row in lines:
-        row = row[6:72].rstrip()
+        if not free_format:
+            row = row[6:72].rstrip()
 
         if row == "" or row[0] in ('*', '/'):
             continue
@@ -263,7 +263,7 @@ def clean_names(lines, ensure_unique_names=False, strip_prefix=False,
     return lines
 
 
-def process_cobol(lines):
-    return clean_names(denormalize_cobol(parse_cobol(clean_cobol(lines))),
+def process_cobol(lines, free_format):
+    return clean_names(denormalize_cobol(parse_cobol(clean_cobol(lines, free_format))),
                        ensure_unique_names=False, strip_prefix=False,
                        make_database_safe=False)

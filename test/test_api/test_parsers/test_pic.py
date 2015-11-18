@@ -35,7 +35,7 @@ def test_offset_calculator():
     ( https://github.com/OpenCobolIDE/OpenCobolIDE/issues/14) and ensure the
     offset of the last element is 75.
     """
-    fi = get_field_infos(source)
+    fi = get_field_infos(source, free_format=False)
     assert fi[-1].offset == 75
 
 
@@ -60,6 +60,8 @@ advanced_sample = '''       78 someconst VALUE 'test'.
                88 test2-03-02-set VALUE 'XX'.
             05 test2-03-03 PIC X(01).
                88 test2-03-03-empty VALUE SPACE.
+000000 77 INIZIO                    PIC 9(9)V99 VALUE ZEROS.
+000000 77 FINE                      PIC 9(9)V99 VALUE ZEROS.
 '''
 
 
@@ -67,8 +69,8 @@ def test_advanced():
     """
     A more advanced test (cobol code given by Simon Sobisch)
     """
-    results = [0, 1, 1, 1, 1, 1, 1, 4, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4]
-    infos = get_field_infos(advanced_sample)
+    results = [0, 1, 1, 1, 1, 1, 1, 4, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 1, 1]
+    infos = get_field_infos(advanced_sample, free_format=False)
     assert len(infos) == len(results)
     for info, result in zip(infos, results):
         assert info.offset == result
@@ -85,7 +87,7 @@ def test_name():
     """
     Test if the part "PIC-" from PIC-X8 is not omitted.
     """
-    infos = get_field_infos(name_sample)
+    infos = get_field_infos(name_sample, free_format=False)
     assert len(infos) == 3
     assert infos[-1].name == 'PIC-X8'
 
@@ -97,6 +99,19 @@ def test_comp_fields():
     """
     Test if the part "PIC-" from PIC-X8 is not omitted.
     """
-    infos = get_field_infos(comp_fields_sample)
+    infos = get_field_infos(comp_fields_sample, free_format=False)
     assert len(infos) == 1
     assert infos[0].name == 'Right-Nibble'
+
+
+signed_sample = '''
+01 RDMS-TABLE-LO120-HANDEL.
+      05 LO120-HANLOGGID     PIC S9(16).
+      05 LO120-HANTYP         PIC X(20).
+'''
+
+
+def test_signed_fields():
+    infos = get_field_infos(signed_sample, free_format=True)
+    assert len(infos) == 3
+    assert infos[2].offset == 18
