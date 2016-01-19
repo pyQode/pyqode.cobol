@@ -6,8 +6,8 @@ from .backspace import SmartBackSpaceMode
 from .comments import CommentsMode
 from .goto import GoToDefinitionMode
 from .indenter import IndenterMode
-from .left_margin import LeftMarginMode
 from .pic_offset import OffsetCalculatorMode
+from .margins import MarginsMode
 from .sh import CobolSyntaxHighlighter
 
 
@@ -17,8 +17,8 @@ __all__ = [
     'DocumentOutlineMode',
     'GoToDefinitionMode',
     'IndenterMode',
-    'LeftMarginMode',
     'CobolSyntaxHighlighter',
     'OffsetCalculatorMode',
-    'SmartBackSpaceMode'
+    'SmartBackSpaceMode',
+    'MarginsMode'
 ]

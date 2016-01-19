@@ -39,8 +39,7 @@ class CobolCodeEdit(api.CodeEdit):
         if free_fmt != self._free_format:
             self._free_format = free_fmt
             self.indenter_mode.min_column = 7 if not free_fmt else 0
-            self.left_margin.enabled = not free_fmt
-            self.right_margin.enabled = not free_fmt
+            self.margins.enabled = not free_fmt
             self.syntax_highlighter.rehighlight()
             self._update_backend_format()
 
@@ -117,6 +116,7 @@ class CobolCodeEdit(api.CodeEdit):
         self.global_checker_panel = None
         self.encoding_panel = None
         self.read_only_panel = None
+        self.margins = None
         super().close(*args, **kwargs)
 
     def _setup_modes(self, color_scheme):
@@ -160,9 +160,7 @@ class CobolCodeEdit(api.CodeEdit):
         self.modes.append(cobmodes.CobolSyntaxHighlighter(
             self.document(), color_scheme=api.ColorScheme(color_scheme)))
         self.syntax_highlighter.fold_detector = CobolFoldDetector()
-        self.left_margin = self.modes.append(cobmodes.LeftMarginMode())
-        self.right_margin = self.modes.append(modes.RightMarginMode())
-        self.right_margin.position = 72
+        self.margins = self.modes.append(cobmodes.MarginsMode())
         self.comments_mode = self.modes.append(cobmodes.CommentsMode())
         self.offset_calculator = self.modes.append(
             cobmodes.OffsetCalculatorMode())
