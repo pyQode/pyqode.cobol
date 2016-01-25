@@ -71,8 +71,34 @@ Installation
 Testing
 -------
 
-To test pyqode.cobol, just run the `runtests.py` script with a python 3
-interpreter.
+pyqode.core has a test suite and measure its coverage.
+
+To run the tests, just run ``python setup.py test``
+
+To measure coverage, run::
+
+    python3 setup.py test -a "--cov pyqode"
+
+To check for PEP8 warnings, install pytest-pep8 and run::
+
+    python3 setup.py test -a "--pep8 -m pep8"
+
+
+To run a single test, use ``-a "-- test_file_path.py::test_function"``, e.g.::
+
+    python3 setup.py test -a "-- test/test_api/test_code_edit.py::test_set_plain_text"
+
+
+Testing Matrix
+++++++++++++++
+
+We test the following combinations on Travis-CI:
+
++--------------------------+---------+---------+
+|                          | PyQt4   | PyQt5   |
++==========================+=========+=========+
+| GNU/Linux - Python 3.4   | yes     | yes     |
++--------------------------+---------+---------+
 
 
 .. _pyQode: https://github.com/pyQode/pyQode
