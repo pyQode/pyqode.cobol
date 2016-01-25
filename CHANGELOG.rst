@@ -1,6 +1,17 @@
 Change log
 ==========
 
+2.8.0
+-----
+
+New features:
+
+- add a multi-margins mode: user can configure up to 4 margins
+
+Fixed bugs:
+
+- fix wrong offset for level 77 items
+
 2.7.0
 -----
 
