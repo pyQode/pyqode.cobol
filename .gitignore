@@ -61,8 +61,8 @@ deb_dist
 /gpg_key
 
 # gedit temp files
-*~
 
 # hackedit project files
 .hackedit
 
+/.eggs/
