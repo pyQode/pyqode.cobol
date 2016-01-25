@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This setup script packages pyqode.python
+This setup script packages pyqode.cobol
 """
 import sys
 from setuptools import setup, find_packages
