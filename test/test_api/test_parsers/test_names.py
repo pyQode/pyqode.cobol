@@ -80,8 +80,8 @@ def test_malformed():
     # 2 sections in env div
     assert len(ast.children[0].children) == 2
     # 2 sections in data div
-    assert len(ast.children[1].children) == 2
-    assert len(vars) == 0
+    assert len(ast.children[1].children) == 3
+    assert len(vars) == 3
     assert len(procs) == 1
 
 
@@ -112,3 +112,12 @@ def test_lower_case_variables():
     # 8 variables
     assert len(vars) == 8
     assert vars[0].name == 'fprinter'
+
+
+def test_copy_book():
+    with open('test/testfiles/test.cpy') as f:
+        content = f.read()
+    ast, vars, procs = parser.defined_names(content)
+    # 8 variables
+    assert len(vars) == 16
+    assert vars[0].name == 'txt-lower'
