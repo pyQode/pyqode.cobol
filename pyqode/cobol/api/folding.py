@@ -29,7 +29,7 @@ class CobolFoldDetector(FoldDetector):
             ctext = ' ' * 6 + ctext[7:]
             ptext = ' ' * 6 + ptext[7:]
         if regex.DIVISION.indexIn(ctext) != -1:
-            if 'DATA' in ctext:
+            if 'DATA' in ctext or 'ENVIRONMENT' in ctext:
                 self.data_division = block
                 self._data_div_txt = block.text()
                 self.proc_division = None
@@ -55,7 +55,6 @@ class CobolFoldDetector(FoldDetector):
                 block.blockNumber() > self.proc_division.blockNumber()):
             # we only detect outline of paragraphes
             stext = ctext.strip().upper().replace('.', '')
-            # print(stext, regex.PARAGRAPH_PATTERN.indexIn(block.text()) != -1 and stext not in ['EXIT', 'GOBACK'])
             if regex.PARAGRAPH_PATTERN.indexIn(ctext) != -1 and stext not in ['EXIT', 'GOBACK']:
                 # paragraph
                 return 1
@@ -114,7 +113,7 @@ class CobolFoldDetector(FoldDetector):
 
             lvl = 3 + indent
 
-            if not ctext.lstrip().startswith('*'):
+            if ctext.lstrip().startswith('*'):
                 prev = prev_block
                 flg_trigger = False
                 while (prev.text().strip().startswith('*') or not prev.text().strip()) and prev.isValid():
@@ -122,15 +121,12 @@ class CobolFoldDetector(FoldDetector):
                     TextBlockHelper.set_fold_trigger(prev, False)
                     prev = prev.previous()
                     flg_trigger = True
-                if flg_trigger and 'SECTION' in prev.text().upper():
+                if flg_trigger and 'SECTION' in prev.text().upper() or 'DIVISION' in prev.text().upper():
                     TextBlockHelper.set_fold_trigger(prev, True)
                 else:
                     TextBlockHelper.set_fold_trigger(prev, False)
 
             return lvl
-
-        if self.data_division and self.data_division.isValid():
-            print('other', block.blockNumber(), self.data_division.blockNumber() + 1)
 
         # other lines follow their previous fold level
         plvl = TextBlockHelper.get_fold_lvl(prev_block)

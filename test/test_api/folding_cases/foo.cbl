@@ -34,7 +34,7 @@
            02 PA-HOWMANY       PIC 99      .
        PROCEDURE DIVISION USING RECEIVED-PARAM.
       **************************************
-       MAIN-PRINTER.
+012345 MAIN-PRINTER.
            IF(PA-RESET = "O")
                OPEN OUTPUT FPRINTER
            ELSE
