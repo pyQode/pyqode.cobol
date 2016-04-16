@@ -1,4 +1,4 @@
-symbol: *>
+symbol: *> 
       *******************************************************************
       **=================================================================
       ** Ce programme teste le module VIRTUAL-PRINTER
@@ -60,6 +60,7 @@ symbol: *>
        HELLO-WORLD.
            DISPLAY "Hello World!!".
        END PROGRAM TEST-PRINTER.
+
 ->
       *******************************************************************
       **=================================================================
@@ -72,24 +73,24 @@ symbol: *>
       **************************************
        PROGRAM-ID. TEST-PRINTER.
       **
-       *>ENVIRONMENT DIVISION.
-      *>**************************************
-      *>**
-       *>INPUT-OUTPUT SECTION.
-      *>**-*-*-*-*-*-*-*-*-*-*-*-*-*
-      *>**
-       *>DATA DIVISION.
-      *>**************************************
-       *>FILE SECTION.
-      *>**-*-*-*-*-*-*-*-*-*-*-*-*-*
-      *>**
-       *>WORKING-STORAGE SECTION.
-      *>**-*-*-*-*-*-*-*-*-*-*-*-*-*
-       *>01 PRINTER-PARAM.
-           *>02 PA-RESET         PIC X       VALUE "N"       .
-           *>02 PA-BUFFER        PIC X(80)   VALUE SPACES    .
-           *>02 PA-WHEN          PIC X(6)    VALUE "AFTER"   .
-           *>02 PA-WHAT          PIC X(5)    VALUE "LINES"   .
+      *>  ENVIRONMENT DIVISION.
+      *> **************************************
+      *> **
+      *>  INPUT-OUTPUT SECTION.
+      *> **-*-*-*-*-*-*-*-*-*-*-*-*-*
+      *> **
+      *>  DATA DIVISION.
+      *> **************************************
+      *>  FILE SECTION.
+      *> **-*-*-*-*-*-*-*-*-*-*-*-*-*
+      *> **
+      *>  WORKING-STORAGE SECTION.
+      *> **-*-*-*-*-*-*-*-*-*-*-*-*-*
+      *>  01 PRINTER-PARAM.
+      *>      02 PA-RESET         PIC X       VALUE "N"       .
+      *>      02 PA-BUFFER        PIC X(80)   VALUE SPACES    .
+      *>      02 PA-WHEN          PIC X(6)    VALUE "AFTER"   .
+      *>      02 PA-WHAT          PIC X(5)    VALUE "LINES"   .
            02 PA-HOWMANY       PIC 99      VALUE 1         .
       **
        PROCEDURE DIVISION.

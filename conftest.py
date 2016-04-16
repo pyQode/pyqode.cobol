@@ -58,6 +58,8 @@ def app(request):
 
 @pytest.fixture(scope="session")
 def editor(request):
+    import gettext
+    gettext.NullTranslations().install()
     global _app, _widget
     from pyqode.core import modes
     from pyqode.cobol.widgets import CobolCodeEdit
