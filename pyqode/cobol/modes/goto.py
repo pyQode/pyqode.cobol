@@ -40,7 +40,7 @@ class GoToDefinitionMode(Mode, QObject):
                 self._timer.cancel_requests)
         else:
             self.editor.mouse_moved.disconnect(self._on_mouse_moved)
-            self.editor.mouse_pressed.disconnect(self._on_mouse_released)
+            self.editor.mouse_released.disconnect(self._on_mouse_released)
             self.editor.remove_action(self.action_goto, sub_menu='Python')
             self.editor.mouse_double_clicked.disconnect(
                 self._timer.cancel_requests)
