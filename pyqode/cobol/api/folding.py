@@ -116,12 +116,16 @@ class CobolFoldDetector(FoldDetector):
             if ctext.lstrip().startswith('*'):
                 prev = prev_block
                 flg_trigger = False
-                while (prev.text().strip().startswith('*') or not prev.text().strip()) and prev.isValid():
+                ptext = prev.text().upper()
+                ptext = ' ' * 6 + ptext[7:]
+                while (ptext.strip().startswith('*') or not ptext.strip()) and prev.isValid():
                     TextBlockHelper.set_fold_lvl(prev, lvl)
                     TextBlockHelper.set_fold_trigger(prev, False)
                     prev = prev.previous()
                     flg_trigger = True
-                if flg_trigger and 'SECTION' in prev.text().upper() or 'DIVISION' in prev.text().upper():
+                    ptext = prev.text().upper()
+                    ptext = ' ' * 6 + ptext[7:]
+                if flg_trigger and 'SECTION' in ptext or 'DIVISION' in ptext:
                     TextBlockHelper.set_fold_trigger(prev, True)
                 else:
                     TextBlockHelper.set_fold_trigger(prev, False)
