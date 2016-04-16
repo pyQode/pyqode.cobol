@@ -63,14 +63,13 @@ class CobolFoldDetector(FoldDetector):
                 prev = prev_block
                 while prev.text().strip() == '' and prev.isValid():
                     prev = prev.previous()
-                if self.editor.free_format:
-                    ptext = prev.text()
-                else:
-                    ptext = ' ' * 6 + ptext[7:]
-                if ptext.strip().endswith('SECTION.'):
+                prtext = prev.text()
+                if not self.editor.free_format:
+                    prtext = ' ' * 6 + ptext[7:]
+                if prtext.strip().endswith('SECTION.'):
                     return 2
                 # content of a paragraph
-                if regex.PARAGRAPH_PATTERN.indexIn(ptext) != -1 and not exit_goback:
+                if regex.PARAGRAPH_PATTERN.indexIn(prtext) != -1 and not exit_goback:
                     return 3
                 else:
                     cstxt = ctext.lstrip()
@@ -117,14 +116,16 @@ class CobolFoldDetector(FoldDetector):
                 prev = prev_block
                 flg_trigger = False
                 ptext = prev.text().upper()
-                ptext = ' ' * 6 + ptext[7:]
+                if not self.editor.free_format:
+                    ptext = ' ' * 6 + ptext[7:]
                 while (ptext.strip().startswith('*') or not ptext.strip()) and prev.isValid():
                     TextBlockHelper.set_fold_lvl(prev, lvl)
                     TextBlockHelper.set_fold_trigger(prev, False)
                     prev = prev.previous()
                     flg_trigger = True
                     ptext = prev.text().upper()
-                    ptext = ' ' * 6 + ptext[7:]
+                    if not self.editor.free_format:
+                        ptext = ' ' * 6 + ptext[7:]
                 if flg_trigger and 'SECTION' in ptext or 'DIVISION' in ptext:
                     TextBlockHelper.set_fold_trigger(prev, True)
                 else:
