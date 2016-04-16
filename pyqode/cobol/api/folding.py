@@ -54,9 +54,9 @@ class CobolFoldDetector(FoldDetector):
         if (self.proc_division and self.proc_division.isValid() and
                 block.blockNumber() > self.proc_division.blockNumber()):
             # we only detect outline of paragraphes
-            stext = block.text().strip().upper().replace('.', '')
+            stext = ctext.strip().upper().replace('.', '')
             # print(stext, regex.PARAGRAPH_PATTERN.indexIn(block.text()) != -1 and stext not in ['EXIT', 'GOBACK'])
-            if regex.PARAGRAPH_PATTERN.indexIn(block.text()) != -1 and stext not in ['EXIT', 'GOBACK']:
+            if regex.PARAGRAPH_PATTERN.indexIn(ctext) != -1 and stext not in ['EXIT', 'GOBACK']:
                 # paragraph
                 return 1
             else:
@@ -64,10 +64,14 @@ class CobolFoldDetector(FoldDetector):
                 prev = prev_block
                 while prev.text().strip() == '' and prev.isValid():
                     prev = prev.previous()
-                if prev.text().strip().endswith('SECTION.'):
+                if self.editor.free_format:
+                    ptext = prev.text()
+                else:
+                    ptext = ' ' * 6 + ptext[7:]
+                if ptext.strip().endswith('SECTION.'):
                     return 2
                 # content of a paragraph
-                if regex.PARAGRAPH_PATTERN.indexIn(prev.text()) != -1 and not exit_goback:
+                if regex.PARAGRAPH_PATTERN.indexIn(ptext) != -1 and not exit_goback:
                     return 3
                 else:
                     cstxt = ctext.lstrip()
