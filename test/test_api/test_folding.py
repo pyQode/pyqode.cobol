@@ -2,7 +2,7 @@ import functools
 import os
 import pytest
 from pyqode.core.api import folding
-
+from pyqode.cobol.widgets import CobolCodeEdit
 
 def delete_file_on_return(path):
     """
@@ -38,18 +38,25 @@ class FoldDetectorTestCase:
             self.expected_results_content = f.read()
 
     @delete_file_on_return('file_structure')
-    def execute(self, editor):
+    def execute(self, free_format=False):
+        editor = CobolCodeEdit(free_format=free_format)
         editor.setPlainText(self.test_file_content, '', '')
         with open('file_structure', 'w') as f:
             folding.print_tree(editor, file=f, print_blocks=True)
         with open('file_structure', 'r') as f:
             results_content = f.read()
         assert results_content == self.expected_results_content
+        editor.clear()
 
 
-@pytest.mark.parametrize('case', [
-    FoldDetectorTestCase('test/test_api/folding_cases/foo.cbl',
-                         'test/test_api/folding_cases/foo.static_results')
+@pytest.mark.parametrize('case, free_format', [
+    (FoldDetectorTestCase('test/test_api/folding_cases/cobjapi.cob',
+                          'test/test_api/folding_cases/cobjapi.static_results'), True),
+    (FoldDetectorTestCase('test/test_api/folding_cases/cobolmac.cob',
+                          'test/test_api/folding_cases/cobolmac.static_results'), True),
+    (FoldDetectorTestCase('test/test_api/folding_cases/foo.cbl',
+                          'test/test_api/folding_cases/foo.static_results'), False),
+
 ])
-def test_fold_detection_static(editor, case):
-    case.execute(editor)
+def test_fold_detection_static(case, free_format):
+    case.execute(free_format=free_format)
