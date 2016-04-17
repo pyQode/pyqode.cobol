@@ -33,7 +33,7 @@ install:
 
 script:
  - pip install -e .
- - catchsegv py.test --cov pyqode -vv
+ - catchsegv py.test --cov pyqode
 
 after_success:
  - coveralls
