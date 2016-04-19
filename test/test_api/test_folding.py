@@ -102,17 +102,17 @@ def test_dynamic_folding_insert_end_if():
     # data division (which is not a fold trigger initially) block will become a fold trigger
     editor = CobolCodeEdit()
     editor.setPlainText(end_if_code, '', '')
-    editor.show()
     th = TextHelper(editor)
     block = editor.document().findBlockByNumber(4)
     first, last = FoldScope(block).get_range()
     assert first == 4
-    assert last == 8
+    assert last == 5
     cursor = th.goto_line(5, column=len('          DISPLAY "FOO"'))
     cursor.insertText('\n       END-IF')
     first, last = FoldScope(block).get_range()
     assert first == 4
     assert last == 6
+    editor.close()
 
 
 end_perform_code = """       IDENTIFICATION DIVISION.
@@ -134,14 +134,14 @@ def test_dynamic_folding_insert_end_perform():
     # data division (which is not a fold trigger initially) block will become a fold trigger
     editor = CobolCodeEdit()
     editor.setPlainText(end_perform_code, '', '')
-    editor.show()
     th = TextHelper(editor)
     block = editor.document().findBlockByNumber(6)
     first, last = FoldScope(block).get_range()
     assert first == 6
-    assert last == 10
+    assert last == 7
     cursor = th.goto_line(7, column=len('          DISPLAY "FOO"'))
     cursor.insertText('\n       END-PERFORM')
     first, last = FoldScope(block).get_range()
     assert first == 6
     assert last == 8
+    editor.close()

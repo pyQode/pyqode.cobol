@@ -56,21 +56,21 @@
 150604                     MOVE SPACES TO ENREG-PRINTER
 150604                     WRITE ENREG-PRINTER
 150604                 END-PERFORM
-150604              END-IF
-150604          END-IF
-150604          WRITE ENREG-PRINTER FROM PA-BUFFER
-150604          IF(PA-WHEN = "BEFORE")
-150604             IF(PA-WHAT = "PAGE")
-150604                 MOVE '>------------------------------------------'
-150604-'------------------------------------<' TO ENREG-PRINTER
-150604                 WRITE ENREG-PRINTER
-150604             ELSE
-150604                 SUBTRACT 1 FROM PA-HOWMANY
-150604                 PERFORM PA-HOWMANY TIMES
-150604                     MOVE SPACES TO ENREG-PRINTER
-150604                     WRITE ENREG-PRINTER
-150604                 END-PERFORM
 150604             END-IF
+150604         END-IF
+150604         WRITE ENREG-PRINTER FROM PA-BUFFER
+150604         IF(PA-WHEN = "BEFORE")
+150604            IF(PA-WHAT = "PAGE")
+150604                MOVE '>------------------------------------------'
+150604-'------------------------------------<' TO ENREG-PRINTER
+150604                WRITE ENREG-PRINTER
+150604            ELSE
+150604                SUBTRACT 1 FROM PA-HOWMANY
+150604                PERFORM PA-HOWMANY TIMES
+150604                    MOVE SPACES TO ENREG-PRINTER
+150604                    WRITE ENREG-PRINTER
+150604                END-PERFORM
+150604            END-IF
 150604         END-IF
 150604     END-IF
 150604     CLOSE FPRINTER
