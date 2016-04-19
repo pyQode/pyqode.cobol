@@ -1,6 +1,22 @@
 Change log
 ==========
 
+2.9.0
+-----
+
+New features:
+
+- add a public method to refresh pic field info
+- improve name parser: assume missing headers
+- many improvements to the cobol code folding (tested on cobolmac and cobjapi).
+
+Fixed bugs:
+
+- wait for fixed/free format to be set on the backend before performing outline analysis
+- fix comments mode in fixed format not inserting the comment symbol at column 7 but two columns before the first
+  non whitepsace character.
+
+
 2.8.0
 -----
 
