@@ -234,6 +234,8 @@ def parse_pic_field(l, c, last_section_node, last_vars, line):
         return None
     if lvl == int('88', 16):
         return None
+    if not name or name.upper().strip() == 'PIC':
+        name = 'FILLER'
     node = Name(Name.Type.Variable, l, c, name, description)
     parent_node.add_child(node)
     last_vars[lvl] = node
