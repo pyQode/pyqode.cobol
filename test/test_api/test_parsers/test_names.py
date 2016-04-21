@@ -54,7 +54,7 @@ def test_lvl88():
     with open('test/testfiles/TEST_LVL_88.cbl') as f:
         content = f.read()
     ast, vars, procs = parser.defined_names(content)
-    assert len(vars) == 9
+    assert len(vars) == 10
 
 
 def test_paragraphes():
@@ -119,5 +119,5 @@ def test_copy_book():
         content = f.read()
     ast, vars, procs = parser.defined_names(content)
     # 8 variables
-    assert len(vars) == 16
+    assert len(vars) == 21
     assert vars[0].name == 'txt-lower'
