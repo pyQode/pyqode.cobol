@@ -1,6 +1,13 @@
 Change log
 ==========
 
+2.10.0
+-------
+
+Fixed bugs:
+
+- correct recognition of SECTION/DIVISION in oder to prevent EXIT SECTION to be shown in the document outline
+
 2.9.0
 -----
 
