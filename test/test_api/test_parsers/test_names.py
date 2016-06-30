@@ -121,3 +121,13 @@ def test_copy_book():
     # 8 variables
     assert len(vars) == 21
     assert vars[0].name == 'txt-lower'
+
+
+def test_structure():
+    # see OpenCobolIDE/OpenCobolIDE#336
+    with open('test/testfiles/structure.cbl') as f:
+        content = f.read()
+    ast, vars, procs = parser.defined_names(content)
+
+    l5_1_node = ast.children[0].children[0].children[0].children[0].children[1]
+    assert len(l5_1_node.children) == 2
