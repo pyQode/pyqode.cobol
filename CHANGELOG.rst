@@ -1,6 +1,13 @@
 Change log
 ==========
 
+2.10.1
+------
+
+Fixed bugs:
+
+- fix name parser issue with complex pic field structure to prevent ordering by level.
+
 2.10.0
 -------
 
