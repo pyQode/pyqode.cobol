@@ -1,0 +1,6 @@
+PyQt5
+-e git://github.com/pyQode/pyqode.qt.git#egg=pyqode.qt
+-e git://github.com/pyQode/pyqode.core.git#egg=pyqode.core
+pytest
+pytest-cov
+coveralls
