@@ -138,6 +138,7 @@ class GoToDefinitionMode(Mode, QObject):
             QTimer.singleShot(100, self._goto_def)
 
     def _goto_def(self):
-        line = self._definition.line
-        col = self._definition.column
-        TextHelper(self.editor).goto_line(line, move=True, column=col)
+        if self._definition:
+            line = self._definition.line
+            col = self._definition.column
+            TextHelper(self.editor).goto_line(line, move=True, column=col)
