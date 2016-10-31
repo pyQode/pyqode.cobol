@@ -73,7 +73,7 @@ class GoToDefinitionMode(Mode, QObject):
                 self._timer.request_job(self.word_clicked.emit, cursor)
 
     def find_definition(self, symbol, definition):
-        if symbol in TextHelper(self.editor).line_text(definition.line):
+        if symbol.lower() in TextHelper(self.editor).line_text(definition.line).lower():
             return definition
         for ch in definition.children:
             d = self.find_definition(symbol, ch)
