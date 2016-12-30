@@ -1,0 +1,137 @@
+# Mnemonic names
+SYSIN                           device name
+SYSIPT                          device name
+STDIN                           device name
+SYSOUT                          device name
+SYSLIST                         device name
+SYSLST                          device name
+STDOUT                          device name
+PRINT                           device name
+PRINTER                         device name
+PRINTER-1                       device name
+SYSERR                          device name
+STDERR                          device name
+CONSOLE                         device name
+C01                             feature name
+C02                             feature name
+C03                             feature name
+C04                             feature name
+C05                             feature name
+C06                             feature name
+C07                             feature name
+C08                             feature name
+C09                             feature name
+C10                             feature name
+C11                             feature name
+C12                             feature name
+CSP                             feature name
+FORMFEED                        feature name
+CALL-CONVENTION                 feature name
+SWITCH-0                        switch name
+SWITCH-1                        switch name
+SWITCH-2                        switch name
+SWITCH-3                        switch name
+SWITCH-4                        switch name
+SWITCH-5                        switch name
+SWITCH-6                        switch name
+SWITCH-7                        switch name
+SWITCH-8                        switch name
+SWITCH-9                        switch name
+SWITCH-10                       switch name
+SWITCH-11                       switch name
+SWITCH-12                       switch name
+SWITCH-13                       switch name
+SWITCH-14                       switch name
+SWITCH-15                       switch name
+SWITCH-16                       switch name
+SWITCH-17                       switch name
+SWITCH-18                       switch name
+SWITCH-19                       switch name
+SWITCH-20                       switch name
+SWITCH-21                       switch name
+SWITCH-22                       switch name
+SWITCH-23                       switch name
+SWITCH-24                       switch name
+SWITCH-25                       switch name
+SWITCH-26                       switch name
+SWITCH-27                       switch name
+SWITCH-28                       switch name
+SWITCH-29                       switch name
+SWITCH-30                       switch name
+SWITCH-31                       switch name
+SWITCH-32                       switch name
+SWITCH-33                       switch name
+SWITCH-34                       switch name
+SWITCH-35                       switch name
+SWITCH-36                       switch name
+
+# Extended mnemonic names (with -fsyntax-extension)
+SW0                             switch name
+SW1                             switch name
+SW2                             switch name
+SW3                             switch name
+SW4                             switch name
+SW5                             switch name
+SW6                             switch name
+SW7                             switch name
+SW8                             switch name
+SW9                             switch name
+SW10                            switch name
+SW11                            switch name
+SW12                            switch name
+SW13                            switch name
+SW14                            switch name
+SW15                            switch name
+SWITCH 0                        switch name
+SWITCH 1                        switch name
+SWITCH 2                        switch name
+SWITCH 3                        switch name
+SWITCH 4                        switch name
+SWITCH 5                        switch name
+SWITCH 6                        switch name
+SWITCH 7                        switch name
+SWITCH 8                        switch name
+SWITCH 9                        switch name
+SWITCH 10                       switch name
+SWITCH 11                       switch name
+SWITCH 12                       switch name
+SWITCH 13                       switch name
+SWITCH 14                       switch name
+SWITCH 15                       switch name
+SWITCH 16                       switch name
+SWITCH 17                       switch name
+SWITCH 18                       switch name
+SWITCH 19                       switch name
+SWITCH 20                       switch name
+SWITCH 21                       switch name
+SWITCH 22                       switch name
+SWITCH 23                       switch name
+SWITCH 24                       switch name
+SWITCH 25                       switch name
+SWITCH 26                       switch name
+SWITCH A                        switch name
+SWITCH B                        switch name
+SWITCH C                        switch name
+SWITCH D                        switch name
+SWITCH E                        switch name
+SWITCH F                        switch name
+SWITCH G                        switch name
+SWITCH H                        switch name
+SWITCH I                        switch name
+SWITCH J                        switch name
+SWITCH K                        switch name
+SWITCH L                        switch name
+SWITCH M                        switch name
+SWITCH N                        switch name
+SWITCH O                        switch name
+SWITCH P                        switch name
+SWITCH Q                        switch name
+SWITCH R                        switch name
+SWITCH S                        switch name
+SWITCH T                        switch name
+SWITCH U                        switch name
+SWITCH V                        switch name
+SWITCH W                        switch name
+SWITCH X                        switch name
+SWITCH Y                        switch name
+SWITCH Z                        switch name

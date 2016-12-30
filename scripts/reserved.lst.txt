@@ -1,0 +1,619 @@
+# Reserved Words                Implemented
+ACCEPT                          Yes
+ACCESS                          Yes
+ACTIVE-CLASS                    No
+ADD                             Yes
+ADDRESS                         Yes
+ADVANCING                       Yes
+AFTER                           Yes
+ALIGNED                         No
+ALL                             Yes
+ALLOCATE                        Yes
+ALPHABET                        Yes
+ALPHABETIC                      Yes
+ALPHABETIC-LOWER                Yes
+ALPHABETIC-UPPER                Yes
+ALPHANUMERIC                    Yes
+ALPHANUMERIC-EDITED             Yes
+ALSO                            Yes
+ALTER                           Yes
+ALTERNATE                       Yes
+AND                             Yes
+ANY                             Yes
+ANYCASE                         No
+ARE                             Yes
+AREA                            Yes
+AREAS                           Yes
+ARGUMENT-NUMBER                 Yes
+ARGUMENT-VALUE                  Yes
+ARITHMETIC                      No (Context sensitive)
+AS                              Yes
+ASCENDING                       Yes
+ASCII                           Yes (Context sensitive)
+ASSIGN                          Yes
+AT                              Yes
+ATTRIBUTE                       Yes (Context sensitive)
+AUTO                            Yes
+AUTO-SKIP                       Yes
+AUTOMATIC                       Yes
+AUTOTERMINATE                   Yes
+AWAY-FROM-ZERO                  Yes (Context sensitive)
+B-AND                           No
+B-NOT                           No
+B-OR                            No
+B-XOR                           No
+BACKGROUND-COLOR                Yes
+BACKGROUND-COLOUR               Yes
+BASED                           Yes
+BEEP                            Yes
+BEFORE                          Yes
+BELL                            Yes
+BINARY                          Yes
+BINARY-C-LONG                   Yes
+BINARY-CHAR                     Yes
+BINARY-DOUBLE                   Yes
+BINARY-INT                      Yes
+BINARY-LONG                     Yes
+BINARY-LONG-LONG                Yes
+BINARY-SHORT                    Yes
+BIT                             No
+BLANK                           Yes
+BLINK                           Yes
+BLOCK                           Yes
+BOOLEAN                         No
+BOTTOM                          Yes
+BY                              Yes
+BYTE-LENGTH                     Yes (Context sensitive)
+CALL                            Yes
+CANCEL                          Yes
+CAPACITY                        Yes (Context sensitive)
+CARD-PUNCH                      Yes (Context sensitive)
+CARD-READER                     Yes (Context sensitive)
+CASSETTE                        Yes (Context sensitive)
+CD                              Yes
+CENTER                          No (Context sensitive)
+CF                              Yes
+CH                              Yes
+CHAIN                           No
+CHAINING                        Yes
+CHARACTER                       Yes
+CHARACTERS                      Yes
+CLASS                           Yes
+CLASS-ID                        No
+CLASSIFICATION                  Yes (Context sensitive)
+CLOSE                           Yes
+CODE                            Yes
+CODE-SET                        Yes
+COL                             Yes
+COLLATING                       Yes
+COLOR                           No
+COLS                            Yes
+COLUMN                          Yes
+COLUMNS                         Yes
+COMMA                           Yes
+COMMAND-LINE                    Yes
+COMMIT                          Yes
+COMMON                          Yes
+COMMUNICATION                   Yes
+COMP                            Yes
+COMP-1                          Yes
+COMP-2                          Yes
+COMP-3                          Yes
+COMP-4                          Yes
+COMP-5                          Yes
+COMP-6                          Yes
+COMP-X                          Yes
+COMPUTATIONAL                   Yes
+COMPUTATIONAL-1                 Yes
+COMPUTATIONAL-2                 Yes
+COMPUTATIONAL-3                 Yes
+COMPUTATIONAL-4                 Yes
+COMPUTATIONAL-5                 Yes
+COMPUTATIONAL-X                 Yes
+COMPUTE                         Yes
+CONDITION                       Yes
+CONFIGURATION                   Yes
+CONSTANT                        Yes
+CONTAINS                        Yes
+CONTENT                         Yes
+CONTINUE                        Yes
+CONTROL                         Yes
+CONTROLS                        Yes
+CONVERSION                      Yes (Context sensitive)
+CONVERTING                      Yes
+COPY                            Yes
+CORR                            Yes
+CORRESPONDING                   Yes
+COUNT                           Yes
+CRT                             Yes
+CRT-UNDER                       Yes
+CURRENCY                        Yes
+CURSOR                          Yes
+CYCLE                           Yes (Context sensitive)
+DATA                            Yes
+DATA-POINTER                    No
+DATE                            Yes
+DAY                             Yes
+DAY-OF-WEEK                     Yes
+DE                              Yes
+DEBUGGING                       Yes
+DECIMAL-POINT                   Yes
+DECLARATIVES                    Yes
+DEFAULT                         Yes
+DELETE                          Yes
+DELIMITED                       Yes
+DELIMITER                       Yes
+DEPENDING                       Yes
+DESCENDING                      Yes
+DESTINATION                     Yes
+DESTROY                         No
+DETAIL                          Yes
+DISABLE                         Yes
+DISC                            Yes (Context sensitive)
+DISK                            Yes (Context sensitive)
+DISPLAY                         Yes
+DIVIDE                          Yes
+DIVISION                        Yes
+DOWN                            Yes
+DUPLICATES                      Yes
+DYNAMIC                         Yes
+EBCDIC                          Yes (Context sensitive)
+EC                              Yes
+ECHO                            Yes
+EGI                             Yes
+ELSE                            Yes
+EMI                             Yes
+EMPTY-CHECK                     Yes
+ENABLE                          Yes
+END                             Yes
+END-ACCEPT                      Yes
+END-ADD                         Yes
+END-CALL                        Yes
+END-CHAIN                       No
+END-COMPUTE                     Yes
+END-DELETE                      Yes
+END-DISPLAY                     Yes
+END-DIVIDE                      Yes
+END-EVALUATE                    Yes
+END-IF                          Yes
+END-MULTIPLY                    Yes
+END-OF-PAGE                     Yes
+END-PERFORM                     Yes
+END-READ                        Yes
+END-RECEIVE                     Yes
+END-RETURN                      Yes
+END-REWRITE                     Yes
+END-SEARCH                      Yes
+END-START                       Yes
+END-STRING                      Yes
+END-SUBTRACT                    Yes
+END-UNSTRING                    Yes
+END-WRITE                       Yes
+ENTRY                           Yes
+ENTRY-CONVENTION                No (Context sensitive)
+ENVIRONMENT                     Yes
+ENVIRONMENT-NAME                Yes
+ENVIRONMENT-VALUE               Yes
+EO                              No
+EOL                             Yes (Context sensitive)
+EOP                             Yes
+EOS                             Yes (Context sensitive)
+EQUAL                           Yes
+EQUALS                          Yes
+ERASE                           Yes
+ERROR                           Yes
+ESCAPE                          Yes
+ESI                             Yes
+EVALUATE                        Yes
+EXCEPTION                       Yes
+EXCEPTION-OBJECT                No
+EXCLUSIVE                       Yes
+EXIT                            Yes
+EXPANDS                         No (Context sensitive)
+EXTEND                          Yes
+EXTERNAL                        Yes
+F                               Yes
+FACTORY                         No
+FALSE                           Yes
+FD                              Yes
+FILE                            Yes
+FILE-CONTROL                    Yes
+FILE-ID                         Yes
+FILLER                          Yes
+FINAL                           Yes
+FIRST                           Yes
+FIXED                           Yes
+FLOAT-BINARY-128                No
+FLOAT-BINARY-32                 No
+FLOAT-BINARY-64                 No
+FLOAT-DECIMAL-16                Yes
+FLOAT-DECIMAL-34                Yes
+FLOAT-EXTENDED                  No
+FLOAT-INFINITY                  No
+FLOAT-LONG                      Yes
+FLOAT-NOT-A-NUMBER              No (Context sensitive)
+FLOAT-SHORT                     Yes
+FOOTING                         Yes
+FOR                             Yes
+FOREGROUND-COLOR                Yes
+FOREGROUND-COLOUR               Yes
+FOREVER                         Yes (Context sensitive)
+FORMAT                          No
+FREE                            Yes
+FROM                            Yes
+FULL                            Yes
+FUNCTION                        Yes
+FUNCTION-ID                     Yes
+FUNCTION-POINTER                No
+GENERATE                        Yes
+GET                             No
+GIVING                          Yes
+GLOBAL                          Yes
+GO                              Yes
+GOBACK                          Yes
+GREATER                         Yes
+GRID                            Yes
+GROUP                           Yes
+GROUP-USAGE                     No
+HANDLE                          No
+HEADING                         Yes
+HIGH-VALUE                      Yes
+HIGH-VALUES                     Yes
+HIGHLIGHT                       Yes
+I-O                             Yes
+I-O-CONTROL                     Yes
+ID                              Yes
+IDENTIFICATION                  Yes
+IF                              Yes
+IGNORE                          Yes
+IGNORING                        Yes (Context sensitive)
+IMPLEMENTS                      No (Context sensitive)
+IN                              Yes
+INDEX                           Yes
+INDEXED                         Yes
+INDICATE                        Yes
+INHERITS                        No
+INITIAL                         Yes
+INITIALISE                      Yes
+INITIALISED                     Yes
+INITIALIZE                      Yes
+INITIALIZED                     Yes
+INITIATE                        Yes
+INPUT                           Yes
+INPUT-OUTPUT                    Yes
+INSPECT                         Yes
+INTERFACE                       No
+INTERFACE-ID                    No
+INTERMEDIATE                    No (Context sensitive)
+INTO                            Yes
+INTRINSIC                       Yes (Context sensitive)
+INVALID                         Yes
+INVOKE                          No
+IS                              Yes
+JUST                            Yes
+JUSTIFIED                       Yes
+KEPT                            Yes
+KEY                             Yes
+KEYBOARD                        Yes (Context sensitive)
+LABEL                           Yes
+LAST                            Yes
+LC_ALL                          No (Context sensitive)
+LC_COLLATE                      No (Context sensitive)
+LC_CTYPE                        No (Context sensitive)
+LC_MESSAGES                     No (Context sensitive)
+LC_MONETARY                     No (Context sensitive)
+LC_NUMERIC                      No (Context sensitive)
+LC_TIME                         No (Context sensitive)
+LEADING                         Yes
+LEFT                            Yes
+LEFT-JUSTIFY                    No
+LEFTLINE                        Yes
+LENGTH                          Yes
+LENGTH-CHECK                    Yes
+LESS                            Yes
+LIMIT                           Yes
+LIMITS                          Yes
+LINAGE                          Yes
+LINAGE-COUNTER                  Yes
+LINE                            Yes
+LINE-COUNTER                    Yes
+LINES                           Yes
+LINKAGE                         Yes
+LOCAL-STORAGE                   Yes
+LOCALE                          Yes
+LOCK                            Yes
+LOW-VALUE                       Yes
+LOW-VALUES                      Yes
+LOWER                           Yes (Context sensitive)
+LOWLIGHT                        Yes
+MAGNETIC-TAPE                   Yes (Context sensitive)
+MANUAL                          Yes
+MEMORY                          Yes
+MERGE                           Yes
+MESSAGE                         Yes
+METHOD                          No
+METHOD-ID                       No
+MINUS                           Yes
+MODE                            Yes
+MOVE                            Yes
+MULTIPLE                        Yes
+MULTIPLY                        Yes
+NAME                            Yes (Context sensitive)
+NATIONAL                        Yes
+NATIONAL-EDITED                 Yes
+NATIVE                          Yes
+NEAREST-AWAY-FROM-ZERO          Yes (Context sensitive)
+NEAREST-EVEN                    Yes (Context sensitive)
+NEAREST-TOWARD-ZERO             Yes (Context sensitive)
+NEGATIVE                        Yes
+NESTED                          No
+NEXT                            Yes
+NO                              Yes
+NO-ECHO                         Yes
+NONE                            No (Context sensitive)
+NORMAL                          Yes (Context sensitive)
+NOT                             Yes
+NOTHING                         Yes
+NULL                            Yes
+NULLS                           Yes
+NUMBER                          Yes
+NUMBERS                         Yes
+NUMERIC                         Yes
+NUMERIC-EDITED                  Yes
+OBJECT                          No
+OBJECT-COMPUTER                 Yes
+OBJECT-REFERENCE                No
+OCCURS                          Yes
+OF                              Yes
+OFF                             Yes
+OMITTED                         Yes
+ON                              Yes
+ONLY                            Yes
+OPEN                            Yes
+OPTIONAL                        Yes
+OPTIONS                         No
+OR                              Yes
+ORDER                           Yes
+ORGANISATION                    Yes
+ORGANIZATION                    Yes
+OTHER                           Yes
+OUTPUT                          Yes
+OVERFLOW                        Yes
+OVERLINE                        Yes
+OVERRIDE                        No
+PACKED-DECIMAL                  Yes
+PADDING                         Yes
+PAGE                            Yes
+PAGE-COUNTER                    Yes
+PARAGRAPH                       Yes (Context sensitive)
+PERFORM                         Yes
+PF                              Yes
+PH                              Yes
+PIC                             Yes
+PICTURE                         Yes
+PLUS                            Yes
+POINTER                         Yes
+POSITION                        Yes
+POSITIVE                        Yes
+PREFIXED                        No (Context sensitive)
+PRESENT                         Yes
+PREVIOUS                        Yes
+PRINT                           Yes (Context sensitive)
+PRINTER                         Yes (Context sensitive)
+PRINTER-1                       Yes (Context sensitive)
+PRINTING                        Yes
+PROCEDURE                       Yes
+PROCEDURE-POINTER               Yes
+PROCEDURES                      Yes
+PROCEED                         Yes
+PROGRAM                         Yes
+PROGRAM-ID                      Yes
+PROGRAM-POINTER                 Yes
+PROHIBITED                      Yes (Context sensitive)
+PROMPT                          Yes
+PROPERTY                        No
+PROTECTED                       Yes
+PROTOTYPE                       No
+PURGE                           Yes
+QUEUE                           Yes
+QUOTE                           Yes
+QUOTES                          Yes
+RAISE                           No
+RAISING                         No
+RANDOM                          Yes
+RD                              Yes
+READ                            Yes
+RECEIVE                         Yes
+RECORD                          Yes
+RECORDING                       Yes
+RECORDS                         Yes
+RECURSIVE                       Yes (Context sensitive)
+REDEFINES                       Yes
+REEL                            Yes
+REFERENCE                       Yes
+REFERENCES                      Yes
+RELATION                        No (Context sensitive)
+RELATIVE                        Yes
+RELEASE                         Yes
+REMAINDER                       Yes
+REMOVAL                         Yes
+RENAMES                         Yes
+REPLACE                         Yes
+REPLACING                       Yes
+REPORT                          Yes
+REPORTING                       Yes
+REPORTS                         Yes
+REPOSITORY                      Yes
+REQUIRED                        Yes
+RESERVE                         Yes
+RESET                           Yes
+RESUME                          No
+RETRY                           Yes
+RETURN                          Yes
+RETURNING                       Yes
+REVERSE                         Yes
+REVERSE-VIDEO                   Yes
+REVERSED                        Yes
+REWIND                          Yes
+REWRITE                         Yes
+RF                              Yes
+RH                              Yes
+RIGHT                           Yes
+RIGHT-JUSTIFY                   No
+ROLLBACK                        Yes
+ROUNDED                         Yes
+ROUNDING                        No (Context sensitive)
+RUN                             Yes
+S                               Yes
+SAME                            Yes
+SCREEN                          Yes
+SCROLL                          Yes (Context sensitive)
+SD                              Yes
+SEARCH                          Yes
+SECONDS                         Yes (Context sensitive)
+SECTION                         Yes
+SECURE                          Yes
+SEGMENT                         Yes
+SEGMENT-LIMIT                   Yes
+SELECT                          Yes
+SELF                            No
+SEND                            Yes
+SENTENCE                        Yes
+SEPARATE                        Yes
+SEQUENCE                        Yes
+SEQUENTIAL                      Yes
+SET                             Yes
+SHARING                         Yes
+SIGN                            Yes
+SIGNED                          Yes
+SIGNED-INT                      Yes
+SIGNED-LONG                     Yes
+SIGNED-SHORT                    Yes
+SIZE                            Yes
+SORT                            Yes
+SORT-MERGE                      Yes
+SOURCE                          Yes
+SOURCE-COMPUTER                 Yes
+SOURCES                         No
+SPACE                           Yes
+SPACE-FILL                      No
+SPACES                          Yes
+SPECIAL-NAMES                   Yes
+STANDARD                        Yes
+STANDARD-1                      Yes
+STANDARD-2                      Yes
+STANDARD-BINARY                 No (Context sensitive)
+STANDARD-DECIMAL                No (Context sensitive)
+START                           Yes
+STATEMENT                       No (Context sensitive)
+STATIC                          Yes (Context sensitive)
+STATUS                          Yes
+STDCALL                         Yes (Context sensitive)
+STEP                            Yes
+STOP                            Yes
+STRING                          Yes
+STRONG                          No (Context sensitive)
+SUB-QUEUE-1                     Yes
+SUB-QUEUE-2                     Yes
+SUB-QUEUE-3                     Yes
+SUBTRACT                        Yes
+SUM                             Yes
+SUPER                           No
+SUPPRESS                        Yes
+SYMBOL                          No (Context sensitive)
+SYMBOLIC                        Yes
+SYNC                            Yes
+SYNCHRONISED                    Yes
+SYNCHRONIZED                    Yes
+SYSTEM-DEFAULT                  Yes
+SYSTEM-OFFSET                   Yes
+TAB                             Yes (Context sensitive)
+TABLE                           Yes
+TALLYING                        Yes
+TAPE                            Yes (Context sensitive)
+TERMINATE                       Yes
+TEST                            Yes
+TEXT                            Yes
+THAN                            Yes
+THREAD                          No
+THEN                            Yes
+THROUGH                         Yes
+THRU                            Yes
+TIME                            Yes
+TIME-OUT                        Yes (Context sensitive)
+TIMEOUT                         Yes
+TIMES                           Yes
+TO                              Yes
+TOP                             Yes
+TOWARD-GREATER                  Yes (Context sensitive)
+TOWARD-LESSER                   Yes (Context sensitive)
+TRAILING                        Yes
+TRAILING-SIGN                   No
+TRANSFORM                       Yes
+TRUE                            Yes
+TRUNCATION                      Yes (Context sensitive)
+TYPE                            Yes
+TYPEDEF                         No
+U                               Yes
+UCS-4                           No (Context sensitive)
+UNBOUNDED                       Yes (Context sensitive)
+UNDERLINE                       Yes
+UNIT                            Yes
+UNIVERSAL                       No
+UNLOCK                          Yes
+UNSIGNED                        Yes
+UNSIGNED-INT                    Yes
+UNSIGNED-LONG                   Yes
+UNSIGNED-SHORT                  Yes
+UNSTRING                        Yes
+UNTIL                           Yes
+UP                              Yes
+UPDATE                          Yes
+UPON                            Yes
+UPPER                           Yes (Context sensitive)
+USAGE                           Yes
+USE                             Yes
+USER                            Yes (Context sensitive)
+USER-DEFAULT                    Yes
+USING                           Yes
+UTF-16                          No (Context sensitive)
+UTF-8                           No (Context sensitive)
+V                               Yes
+VAL-STATUS                      No
+VALID                           No
+VALIDATE                        No
+VALIDATE-STATUS                 No
+VALUE                           Yes
+VALUES                          Yes
+VARIABLE                        Yes
+VARYING                         Yes
+WAIT                            Yes
+WHEN                            Yes
+WINDOW                          No
+WITH                            Yes
+WORDS                           Yes
+WORKING-STORAGE                 Yes
+WRITE                           Yes
+YYYYDDD                         Yes (Context sensitive)
+YYYYMMDD                        Yes (Context sensitive)
+ZERO                            Yes
+ZERO-FILL                       No
+ZEROES                          Yes
+ZEROS                           Yes
+
+# Extra (obsolete) context sensitive words
+AUTHOR
+DATE-COMPILED
+DATE-MODIFIED
+DATE-WRITTEN
+INSTALLATION
+REMARKS
+SECURITY
+
+# Extra internal registers      Definition
+RETURN-CODE                     USAGE BINARY-LONG
+SORT-RETURN                     USAGE BINARY-LONG
+NUMBER-OF-CALL-PARAMETERS       USAGE BINARY-LONG
+COB-CRT-STATUS                  PIC 9(4)
+TALLY                           GLOBAL PIC 9(5) USAGE BINARY VALUE ZERO
+LENGTH OF                       USAGE BINARY-LONG
