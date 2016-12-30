@@ -1,6 +1,26 @@
 Change log
 ==========
 
+2.11.0
+------
+
+As of pyqode 2.11, the project has entered in maintainance mode. Only critical bug fixes will be adressed. The core
+team won't add any new features but we will continue to accept PR as long as they are properly tested and not too risky.
+
+New features:
+
+- update COBOL keywords for GnuCOBOL 2.x
+- current word highlighter is now case insensitive
+- add support for PyQt 5.7
+
+Bug fixes:
+
+- improved indentation (TAB/SHIFT+TAB) in fixed mode
+- improvements to the name parser in complex structures
+- remove highlighting of lines that starts with '*' in free format (See pyQode/pyQode#64)
+- fix pyQode/pyQode#63
+- fix pyQode/pyQode#70
+
 2.10.1
 ------
 
